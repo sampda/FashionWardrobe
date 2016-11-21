@@ -1,0 +1,11 @@
+create or replace view productview as select 
+c.categoryName,
+sc.subcategoryName,
+s.companyName,s.companyUrl,
+p.productId,p.productName,p.productPrice,p.productDesc,p.productQauntity,p.productDiscount,p.date,p.enabled,
+ps.productBrand,ps.productColor,ps.productFabric,ps.productType,ps.productSize,ps.productShippingCost,
+ps.productDesign,ps.productWashType,ps.productCollar
+from Category c join Subcategory sc on c.categoryId=sc.categoryId
+join product p on p.subcategoryId=sc.subcategoryId
+join supplier s on p.supplierId=s.supplierId
+left outer join productSpecification ps on ps.productId=p.productId

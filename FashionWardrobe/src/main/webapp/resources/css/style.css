@@ -1,0 +1,11 @@
+input.hidden 
+{
+    position: absolute;
+    left: -9999px;
+}
+
+.panel-body2
+{ 
+    margin-bottom:20px; 
+	padding:20px;
+}

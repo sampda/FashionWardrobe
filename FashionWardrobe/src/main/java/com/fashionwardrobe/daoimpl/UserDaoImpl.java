@@ -122,6 +122,39 @@ public class UserDaoImpl implements UserDao{
 	}
 	
 	
+	public void UpdateUserDetails(UserDetails userDetails) 
+	{
+	 sessionFactory.getCurrentSession().update(userDetails);
+	}
 
+	public void UpdateUserDetails(User user) 
+	{
+		sessionFactory.getCurrentSession().update(user);
+		
+	}
+
+	public void UpdateUserDetails(ShippingAddress shippingAddress) 
+	{
+		
+		sessionFactory.getCurrentSession().update(shippingAddress);		
+	}
+
+	public void UpdateUserDetails(BillingAddress billingAddress) 
+	{
+		
+		sessionFactory.getCurrentSession().update(billingAddress);
+	}
+
+	@SuppressWarnings("unchecked")
+	public Supplier getSupplierById(int userId) 
+	{
+		String sql = "from Supplier where userDetails_userId=" +userId;
+		List<Supplier> list = sessionFactory.getCurrentSession().createQuery(sql).getResultList();
+		if(list!=null && !list.isEmpty())
+		{
+			return list.get(0);
+		}
+	    return null;
+	}
 }
 

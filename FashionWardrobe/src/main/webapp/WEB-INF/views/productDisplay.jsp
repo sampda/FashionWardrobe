@@ -40,7 +40,7 @@
       		 <span class="glyphicon btn-glyphicon glyphicon-credit-card img-circle text-primary"></span></a>
       	     <a class="btn icon-btn btn-primary" href="buyNow-{{x.productId}}?userId=1" data-toggle="tooltip" data-placement="bottom" title="Add To WishList">
       	     <span class="glyphicon btn-glyphicon glyphicon-heart img-circle text-primary"></span></a>
-      	     <a class="btn icon-btn btn-primary" href="buyNow-{{x.productId}}?userId=1" data-toggle="tooltip" data-placement="bottom" title="Add To Cart">
+      	     <a class="btn icon-btn btn-primary" href="addCart-{{x.productId}}" data-toggle="tooltip" data-placement="bottom" title="Add To Cart">
       	     <span class="glyphicon btn-glyphicon glyphicon-shopping-cart img-circle text-primary"></span></a> 
     		</span>
   		</div>

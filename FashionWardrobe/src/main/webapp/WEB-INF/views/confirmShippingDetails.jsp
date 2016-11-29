@@ -27,9 +27,9 @@
                     <label for="pincode">Pincode</label>
                       <input type="text" class="form-control" name="contactNo" placeholder="${shippingAddress.pincode}" readonly/>
 </div>
-<button name="_eventId_edit" type="submit" class="btn btn-warning">Edit</button>
-<button name ="_eventId_submit" type="submit" class="btn btn-warning">Submit</button>
-<button name ="_eventId_cancel" type="submit" class="btn btn-danger">Cancel</button>
+<button name="_eventId_edit" type="submit" class="btn btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit</button>
+<button name ="_eventId_cancel" type="submit" class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>
+<button name ="_eventId_submit" type="submit" class="btn btn-success"><i class="fa fa-check-square" aria-hidden="true"></i> Submit</button>
 </form:form>
 </div>
 

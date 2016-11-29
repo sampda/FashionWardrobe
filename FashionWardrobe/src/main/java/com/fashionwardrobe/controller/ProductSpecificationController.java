@@ -29,11 +29,11 @@ public class ProductSpecificationController
 	}
 	
 	@RequestMapping(value="/addprodspec-{productId}", method = RequestMethod.POST)
-	public String addproductspec(@PathVariable("productId") int productId,@ModelAttribute("productSpecification") ProductSpecification productSpecification)
+	public String addproductspec(@PathVariable("productId") int productId,@ModelAttribute("productSpecification") ProductSpecification productSpecification, HttpSession session)
 	{
 		productSpecification.setProductId(productId);
 		productSpecificationService.addProductSpecification(productSpecification);
-		return "redirect:/product";
+		return "redirect:/"+session.getAttribute("page");
 		
 	}
 	
@@ -49,7 +49,7 @@ public class ProductSpecificationController
 	    {
 		   HttpSession session= request.getSession();
 		   session.setAttribute("Error", "Product Specification Cannot Be Editted!!Constraint Violation");
-		   return "redirect:/product";
+		   return "redirect:/"+session.getAttribute("page");
 	    }
 		
 		return "productSpec";

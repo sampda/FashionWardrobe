@@ -45,8 +45,7 @@ public class ProductView implements Serializable
     private String productType;
     @Expose
     private String productSize;
-    @Expose
-    private int productShippingCost;
+    
     @Expose
     private String productDesign;
     @Expose
@@ -154,12 +153,7 @@ public class ProductView implements Serializable
 	public void setProductDiscount(int productDiscount) {
 		this.productDiscount = productDiscount;
 	}
-	public int getProductShippingCost() {
-		return productShippingCost;
-	}
-	public void setProductShippingCost(int productShippingCost) {
-		this.productShippingCost = productShippingCost;
-	}
+	
 	public String getProductDesign() {
 		return productDesign;
 	}

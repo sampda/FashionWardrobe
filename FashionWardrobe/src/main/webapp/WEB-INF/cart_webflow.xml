@@ -23,13 +23,11 @@
 		<transition on="submit" to="billing"/> 
 		<transition on="edit" to="editShippingDetails"/>
 		<transition on="cancel" to="cancel"/>
-		
 	</view-state>
 	
-	<view-state id="editShippingDetails" view="shippingDetails" model="shippingAddress">
+	<view-state id="editShippingDetails" view="shippingDetails1" model="shippingAddress">
 		<transition on="submit" to="validateShipping"/> 
-		<transition on="cancel" to="cancel"/>
-		
+		<transition on="back" to="shippingDetails"/>
 	</view-state>
 	
 	<action-state id="validateShipping">
@@ -45,7 +43,7 @@
 	</action-state>
 	
 	<action-state id="updateShippingDetails">
-	<evaluate expression="userService.savOrUpdateShipping(shippingAddress)"></evaluate>
+	<evaluate expression="userService.saveOrUpdateShipping(shippingAddress)"></evaluate>
 		<transition to="billing" />
 	</action-state>
 	
@@ -64,7 +62,7 @@
 	
     <view-state id="editBillingDetails" view="billingDetails1" model="billingAddress">
 		<transition on="submit" to="validateBilling"/> 
-		<transition on="cancel" to="cancel"/>
+		<transition on="back" to="billingDetails"/>
 		
 	</view-state>
 	
@@ -81,7 +79,7 @@
 	</action-state>
 	
 	<action-state id="updateBillingDetails">
-	<evaluate expression="userService.savOrUpdateBilling(billingAddress)"></evaluate>
+	<evaluate expression="userService.saveOrUpdateBilling(billingAddress)"></evaluate>
 		<transition to="payment" />
 	</action-state>
 	
@@ -92,5 +90,5 @@
 	
 	
 <end-state id="success" view="externalRedirect:contextRelative:/updateCartFlag"/>	
-<end-state id="cancel" view="externalRedirect:contextRelative:/deleteCartItem"/>	
+<end-state id="cancel" view="externalRedirect:contextRelative:/home"/>	
 </flow>

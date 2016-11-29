@@ -9,42 +9,42 @@
                    <div class="form-group">
                     <label for="companyName">Company Name</label>
                       <form:input type="text" class="form-control" path="companyName" placeholder="Enter Company Name" maxlength="255"/>
-                      
+                      <form:errors cssStyle="color:red;" path="companyName"/>
                   </div>
                   <div class="form-group">
                     <label for="supplierDescription">Supplier Description</label>
                       <form:input type="text" class="form-control" path="supplierDescription" placeholder="Enter Supplier Description" maxlength="255"/>
-                      
+                      <form:errors cssStyle="color:red;" path="supplierDescription"/>
                   </div>
                   <div class="form-group">
                     <label for="city">City</label>
                       <form:input type="text" class="form-control" path="city" placeholder="Enter City" maxlength="255"/>
-                      
+                      <form:errors cssStyle="color:red;" path="city"/>
                   </div>
                   <div class="form-group">
                     <label for="state">State</label>
                       <form:input type="text" class="form-control" path="state" placeholder="Enter State" maxlength="255"/>
-                     
+                     <form:errors cssStyle="color:red;" path="state"/>
                   </div>
                   <div class="form-group">
                     <label for="pincode">Pincode</label>
                       <form:input type="text" class="form-control" path="pincode" placeholder="Enter Pincode"/>
-                    
+                    <form:errors cssStyle="color:red;" path="pincode"/>
                   </div>
                   <div class="form-group">
                     <label for="district">District</label>
                       <form:input type="text" class="form-control" path="district" placeholder="Enter District" maxlength="255"/>
-                     
+                     <form:errors cssStyle="color:red;" path="district"/>
                   </div>
                   <div class="form-group">
                     <label for="landmark">Landmark</label>
                       <form:input type="text" class="form-control" path="landmark" placeholder="Enter Landmark" maxlength="255"/>
-                    
+                    <form:errors cssStyle="color:red;" path="landmark"/>
                   </div>
                   <div class="form-group">
                     <label for="address">Address</label>
                       <form:input type="text" class="form-control" path="address" placeholder="Enter Address" maxlength="255"/>
-                     
+                     <form:errors cssStyle="color:red;" path="address"/>
                   </div>
                   <div class="form-group">
                     <label for="companyUrl">Company Url</label>

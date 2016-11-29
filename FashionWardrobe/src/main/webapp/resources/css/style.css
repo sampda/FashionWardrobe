@@ -9,3 +9,41 @@ input.hidden
     margin-bottom:20px; 
 	padding:20px;
 }
+
+/* Panel */
+.panel-default>.panel-heading
+{
+	color: white;
+    background-color: #01579B;
+    border-color: #01579B;
+}
+
+.panel-footer {
+    padding: 10px 15px;
+    background-color: #01579B;
+    border-top: 1px solid #01579B;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+/* Form */
+.form-control1
+{
+	width:60px;
+}
+
+.thumbnail 
+{
+	max-height:500px;
+	max-width:400px;
+    display: block;
+    padding: 20px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #01579B;
+    border-radius: 4px;
+    -webkit-transition: border .2s ease-in-out;
+    -o-transition: border .2s ease-in-out;
+    transition: border .2s ease-in-out;
+}

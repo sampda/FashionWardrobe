@@ -1,29 +1,35 @@
 <%@include file="header.jsp" %>
 <div class="container">
 <h2>${sessionScope.Error} 
- <c:set var="Error" value="" scope="session"/></h2> 
+ <c:set var="Error" value="" scope="session"/></h2>
+ <c:set var="page" value="product" scope="session"/> 
 <hr>
     <form:form method="POST" action="add/product" modelAttribute="product" enctype="multipart/form-data">
                  <form:input path="productId" hidden="true"/>
                   <div class="form-group">
                     <label for="productName">Product Name</label>
                       <form:input type="text" class="form-control" path="productName" placeholder="Enter Product Name" maxlength="255"/>
+                      <form:errors cssStyle="color:red;" path="productName"/>
                   </div>
                   <div class="form-group">
                     <label for="productDesc">Product Description</label>
                       <form:input type="text" class="form-control" path="productDesc" placeholder="Enter Product Description" maxlength="255"/>
+                      <form:errors cssStyle="color:red;" path="productDesc"/>
                   </div>
                   <div class="form-group">
                     <label for="productPrice">Product Price</label>
                       <form:input type="text" class="form-control" path="productPrice" placeholder="Enter Product Price"/>
+                      
                   </div>
                    <div class="form-group">
-                    <label for="productQuantity">Product Quantity</label>
+                    <label for="productQauntity">Product Quantity</label>
                       <form:input type="text" class="form-control" path="productQauntity" placeholder="Enter Product Quantity" />
+                      
                   </div>
                    <div class="form-group">
                     <label for="productDiscount">Product Discount</label>
                       <form:input type="text" class="form-control" path="productDiscount" placeholder="Enter Product Discount" />
+                     
                   </div>
                   <div class="form-group">
                       <form:select path="category.categoryName"  class="form-control" items = "${listCategory}" itemValue="categoryName" itemLabel= "categoryName">
@@ -48,15 +54,15 @@
 
     <div class="container">
         <div class="row">
-	       <div class="col-md-12">
+	       <div class="col-xs-12">
                <h4>Product List</h4>
-                              <div>
+<div>
 <label>Search</label>
 <input type="text" ng-model="test"/>
 </div>
-               <div class="table-responsive">
-                    <table id="mytable" class="table table-bordred table-striped" bgcolor="#00FF00">
-                    <thead>
+                         <div class="table-responsive">
+                    <table id="mytable" class="table table-hover" >
+          <thead>
                        <th ng-click="sort('productId')">ProductId
 <span class="glyphicon sort-icon" ng-show="sortKey=='productId'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                        </th>
@@ -83,7 +89,7 @@
                        <th>Manage</th>
                     </thead>
                     <tbody>
-                     <sec:authorize access="hasRole('ROLE_ADMIN')">
+                    
                      <tr ng-repeat="x in resultValue=(abc | filter: test) | orderBy:sortKey:reverse">
                         <td>{{x.productId}}</td>
                         <td>{{x.productName}}</td>
@@ -108,32 +114,8 @@
       
       
                      </tr>
-                     </sec:authorize>
-                     
-                     <sec:authorize access="hasRole('ROLE_SUPPLIER')">
-                     <tr ng-repeat="x in resultValue=(getProduct | filter: test) | orderBy:sortKey:reverse">
-                        <td>{{x.productId}}</td>
-                        <td>{{x.productName}}</td>
-                        <td>{{x.productPrice}}</td>
-                        <td>{{x.productQauntity}}</td>
-                        <td>{{x.productDiscount}}</td>
-                        <td>{{x.date}}</td>
-                        
-                        <td><img src="resources/images/product{{x.productId}}.jpg" width="100" height="100"></td>
-                        <td>{{x.enabled}}</td>
-                        <td>Rs. {{x.productPrice * x.productQauntity}}</td>
-                        <td>
-      <a href ="editProduct-{{x.productId}}"><span class="glyphicon glyphicon-edit" data-toggle="tooltip" title="Edit"></span></a>
-      <a href ="deleteProduct-{{x.productId}}"><span class="glyphicon glyphicon-remove" data-toggle="tooltip" title="Delete"></span></a>
-      <a href="viewfullproduct-{{x.productId}}"><span class="glyphicon glyphicon-eye-open" data-toogle="tooltip" title="View Product"></span></a>
-      <a href="productspec-{{x.productId}}"><span class="fa fa-plus-circle" data-toogle="tooltip" title="Add Product Specification"></span></a>
-       <a href="editProdSpec-{{x.productId}}"><span class="glyphicon glyphicon-edit" data-toogle="tooltip" title="Edit Product Specification"></span></a>       
-       
-      </td>
-      
-      
-                     </tr>
-                     </sec:authorize>
+
+                   
                      
                      <tr>
                      <td></td>
@@ -143,8 +125,9 @@
                      <td></td>
                      <td></td>
                      <td></td>
+                     <td>Grand Total:</td>
+                     <td>  Rs {{resultValue | totalSumPriceQty:'productQauntity':'productPrice'}}</td>
                      <td></td>
-                     <td> Grand Total: Rs {{resultValue | totalSumPriceQty:'productQauntity':'productPrice'}}</td>
                      </tr>
 				   </tbody>
                    </table>
@@ -157,7 +140,7 @@
 <script>
 var app = angular.module('myApp', []).filter('totalSumPriceQty', function () {
     return function (data, key1, key2) {
-        debugger;
+        
         if (typeof (data) === 'undefined' && typeof (key1) === 'undefined' && typeof (key2) === 'undefined') {
             return 0;
         }
@@ -171,8 +154,7 @@ var app = angular.module('myApp', []).filter('totalSumPriceQty', function () {
  app.controller('myCtrl', function($scope,$filter) 
 		 {
     $scope.abc = ${stringProduct};
-    $scope.getProduct = ${stringproductDetails};
-    
+   
     $scope.sort = function(keyname) {
         $scope.sortKey = keyname; //set the sortKey to the param passed
         $scope.reverse = !$scope.reverse; //if true make it false and vice versa
@@ -180,9 +162,6 @@ var app = angular.module('myApp', []).filter('totalSumPriceQty', function () {
       
    
 });
-   
-
-
 
 $(document).ready(function(){
 	    $('[data-toggle="tooltip"]').tooltip({

@@ -43,11 +43,13 @@ public class SubcategoryController
 	@RequestMapping(value="/addsubCategory", method=RequestMethod.POST)
 	public String addsubCategory(@Validated @ModelAttribute("subcategory") Subcategory subcategory,BindingResult result, Model model)
 	{
+		if(result.hasErrors())
+		{
+		
+		
 		model.addAttribute("categoriesjson",this.categoryService.stringCategory());
 		model.addAttribute("subCategoryjson",this.subcategoryService.stringsubCategory());
 		model.addAttribute("listCategory",this.categoryService.listCategory());
-		if(result.hasErrors())
-		{
 			
 			return "subCategory";
 		}

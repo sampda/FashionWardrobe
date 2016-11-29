@@ -9,6 +9,7 @@ import com.fashionwardrobe.daoimpl.UserDaoImpl;
 import com.fashionwardrobe.model.BillingAddress;
 import com.fashionwardrobe.model.ShippingAddress;
 import com.fashionwardrobe.model.Supplier;
+import com.fashionwardrobe.model.User;
 import com.fashionwardrobe.model.UserDetails;
 import com.fashionwardrobe.model.UserRole;
 
@@ -48,6 +49,7 @@ public class UserService
 		userDAOImplementation.saveOrUpdateUserRole(userRole);;
 	}
 	
+	
 	@Transactional
 	public void saveOrUpdateSupplier(Supplier supplier)
 	{
@@ -83,6 +85,37 @@ public class UserService
 	{
 		return userDAOImplementation.getBillingById(userId);
 	}
+	
+	@Transactional
+	public void UpdateUserDetails(UserDetails userDetails)
+	{
+		userDAOImplementation.UpdateUserDetails(userDetails);
+	}
+	
+	@Transactional
+	public void UpdateUserDetails(User user)
+	{
+		userDAOImplementation.UpdateUserDetails(user);
+	}
+	
+	@Transactional
+	public void UpdateUserDetails(ShippingAddress shippingAddress)
+	{
+		userDAOImplementation.UpdateUserDetails(shippingAddress);
+	}
+	
+	@Transactional
+	public void UpdateUserDetails(BillingAddress billingAddress)
+	{
+		userDAOImplementation.UpdateUserDetails(billingAddress);
+	}
+	
+	@Transactional
+	public Supplier getSupplierById(int userId)
+	{
+		return userDAOImplementation.getSupplierById(userId);
+	}
+	
 }
 
 

@@ -1,7 +1,7 @@
 <%@include file="header.jsp" %>
 
 
-<div class="container" style="width:100%">
+<div class="container1" style="width:100%">
     <div class="row">
         <div class="col-md-12">
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -24,7 +24,7 @@
                         
                     </div>
                     <div class="item">
-                        <img src="resources/images/carouselimg8.jpg" style="width:100%;max-height:500px;">
+                        <img src="resources/images/carouselimg9.jpg" style="width:100%;max-height:500px;">
                         
                     </div>
                 </div>
@@ -41,30 +41,46 @@
 </div>
 
 <hr>
+
 <div class="container">
 <h4>TRENDING PRODUCTS</h4>
 	<div class="row">
     	<!-- BEGIN PRODUCTS -->
   		<div ng-repeat="x in abc" class="col-md-3 col-sm-6">
     		<span class="thumbnail">
-      			<a href="viewfullproduct-{{x.productId}}"><img src="resources/images/product{{x.productId}}.jpg" style="width:300px;height:300px;"></a>
+      			<a href="viewfullproduct-{{x.productId}}"><img src="resources/images/product{{x.productId}}.jpg" style="width:200px;height:250px;"></a>
       			<hr>
-      			<p>{{x.productName}}</p>
-      		    <p class="price"><i class="fa fa-inr"></i>{{x.productPrice}}</p>	
-      		 <a class="btn icon-btn btn-primary" href="buyNow-{{x.productId}}?userId=1" data-toggle="tooltip" data-placement="bottom" title="Buy Now">
+      			<p style="min-height:50px; text-align:center;">{{x.productName}}</p>
+      			<div ng-if="x.productDiscount == 0">
+      		    <h4 style="text-align:center;" class="price"><i class="fa fa-inr"></i>{{x.productPrice}}</h4>	
+      		    </div>
+      		    <div ng-if="x.productDiscount != 0">
+      		     <h4 style="text-align:center;" class="price"><i class="fa fa-inr"></i>{{x.productDiscount}}</h4>	
+      		    </div>
+      		  <div ng-if="x.productQauntity != 0">
+      		    <a class="btn icon-btn btn-primary" href="buyNow-{{x.productId}}?userId=1" data-toggle="tooltip" data-placement="bottom" title="Buy Now">
       		 <span class="glyphicon btn-glyphicon glyphicon-credit-card img-circle text-primary"></span></a>
-      	     <a class="btn icon-btn btn-primary" href="buyNow-{{x.productId}}?userId=1" data-toggle="tooltip" data-placement="bottom" title="Add To WishList">
+      	     <a class="btn icon-btn btn-primary" href="wishList-{{x.productId}}" data-toggle="tooltip" data-placement="bottom" title="Add To WishList">
       	     <span class="glyphicon btn-glyphicon glyphicon-heart img-circle text-primary"></span></a>
-      	     <a class="btn icon-btn btn-primary" href="buyNow-{{x.productId}}?userId=1" data-toggle="tooltip" data-placement="bottom" title="Add To Cart">
+      	     <a class="btn icon-btn btn-primary" href="addCart-{{x.productId}}" data-toggle="tooltip" data-placement="bottom" title="Add To Cart">
       	     <span class="glyphicon btn-glyphicon glyphicon-shopping-cart img-circle text-primary"></span></a> 
-    		</span>
+    		
+                   </div>		
+              <div ng-if="x.productQauntity == 0">
+
+      		 <a class="btn icon-btn btn-primary" href="wishList-{{x.productId}}" data-toggle="tooltip" data-placement="bottom" title="Add To WishList">
+      	     <span class="glyphicon btn-glyphicon glyphicon-heart img-circle text-primary"></span></a>
+      	     
+    		</div>
   		</div>
   		
   		
   		<!-- END PRODUCTS -->
 	</div>
 </div>
+
 <hr>
+
 <div class="container">
 <h4>FEATURED PRODUCTS</h4>
 	<div class="row">
@@ -98,51 +114,7 @@
 	</div>
 </div>
 
-<div class="container">
-    			<div class="row pricing">
 
-					<div class="col-md-4">
-						<div class="well">
-							<img src="http://placehold.it/500x400" style="height:200px;width:300px;">
-							<hr>
-							<p>4 GB Datatransfer</p>
-							<hr>
-							<p>4 GB Storage</p>
-							<hr>
-							<p><b>€ 5,99 /PM</b></p>
-							<hr>
-							<a href="#" class="btn btn-warning btn-block">Shop</a>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="well">
-							<img src="http://placehold.it/500x400" style="height:200px;width:300px;">
-							<hr>
-							<p>4 GB Datatransfer</p>
-							<hr>
-							<p>4 GB Storage</p>
-							<hr>
-							<p><b>€ 5,99 /PM</b></p>
-							<hr>
-							<a href="#" class="btn btn-danger btn-block">Shop</a>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="well">
-							<img src="http://placehold.it/500x400" style="height:200px;width:300px;">
-							<hr>
-							<p>4 GB Datatransfer</p>
-							<hr>
-							<p>4 GB Storage</p>
-							<hr>
-							<p><b>€ 5,99 /PM</b></p>
-							<hr>
-							<a href="#" class="btn btn-default btn-block">Shop</a>
-						</div>
-					</div>
-					
-			</div>		
-</div>
 <script>
 $(document).ready( function() {
     $('#carousel-example-generic').carousel({

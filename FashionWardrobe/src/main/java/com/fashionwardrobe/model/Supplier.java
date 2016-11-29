@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.google.gson.annotations.Expose;
 
@@ -20,21 +20,29 @@ public class Supplier implements Serializable
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int supplierId;
-	@Expose	
+	@Expose
+	@NotEmpty(message="Company Name Name Should Not Be Empty")
 	private String companyName;
 	@Expose
+	@NotEmpty(message="Supplier Description Name Should Not Be Empty")
 	private String supplierDescription;
 	@Expose	
+	@NotEmpty(message="City Name Should Not Be Empty")
 	private String city;
 	@Expose
+	@NotEmpty(message="State Name Should Not Be Empty")
 	private String state;
 	@Expose
+	@NotEmpty(message="Pincode Name Should Not Be Empty")
 	private String pincode;
 	@Expose
+	@NotEmpty(message="District Name Should Not Be Empty")
 	private String district;
 	@Expose
+	@NotEmpty(message="Landmark Name Should Not Be Empty")
 	private String landmark;
 	@Expose
+	@NotEmpty(message="Address Name Should Not Be Empty")
 	private String address;
 	@Expose
 	private String companyUrl;

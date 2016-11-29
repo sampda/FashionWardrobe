@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.fashionwardrobe.model.Category;
+import com.fashionwardrobe.model.Subcategory;
 import com.fashionwardrobe.service.Categoryservice;
 import com.fashionwardrobe.service.ProductFullViewService;
 import com.fashionwardrobe.service.ProductService;
@@ -47,43 +48,46 @@ public class Fashion
 	}
 	
 	@RequestMapping("/admin")
-	public String getAdmin()
+	public String getAdmin(Model model)
 	{
-		
+		model.addAttribute("listCategory",this.categoryService.listCategory());
 		return "admin";
 	}
 	
 	@RequestMapping("/403")
-	public String get403()
+	public String get403(Model model)
 	{
-		
+		model.addAttribute("listCategory",this.categoryService.listCategory());
 		return "403";
 	}
 	
+	
 	@RequestMapping("/contactUs")
-	public String getContact()
+	public String getContact(Model model)
 	{
-		
+		model.addAttribute("listCategory",this.categoryService.listCategory());
 		return "contactUs";
 	}
 	
+	
+	
 	@RequestMapping(value = "/getTags", method = RequestMethod.GET)
-	public @ResponseBody String getTags(@RequestParam String categoryName) {
+	public @ResponseBody String getTags(@RequestParam String subCategoryName) {
 		
-		return simulateSearchResult(categoryName);
+		return simulateSearchResult(subCategoryName);
 
 	}
 
-	private String simulateSearchResult(String categoryName) {
+	private String simulateSearchResult(String subCategoryName) {
 
-		List<Category> result = new ArrayList<Category>();
-		List<Category> data = categoryService.listCategory();
+		List<Subcategory> result = new ArrayList<Subcategory>();
+  	    List<Subcategory> data = subcategoryService.listsubCategory();
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 		String j = null;
 		// iterate a list and filter by tagName
-		for(Category tag : data) {
+		for(Subcategory tag : data) {
 			
-			if (tag.getCategoryName().contains(categoryName)) {
+			if (tag.getSubCategoryName().contains(subCategoryName)) {
 				
 				result.add(tag);
 				j=gson.toJson(result);

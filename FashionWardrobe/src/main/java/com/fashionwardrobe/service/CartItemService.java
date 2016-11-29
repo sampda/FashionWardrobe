@@ -1,5 +1,7 @@
 package com.fashionwardrobe.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,5 +37,17 @@ public class CartItemService
 		public void UpdateCartItemFlag(int cartItemId) 
 		{
 			cartItemDaoImpl.UpdateCartItemFlag(cartItemId);
+		}
+		
+		@Transactional
+		public List<CartItem> cartList(int userId) 
+		{
+			return cartItemDaoImpl.cartList(userId);
+		}
+		
+		@Transactional
+		public List<CartItem> orderedList(int userId)
+		{
+			return cartItemDaoImpl.orderedList(userId);
 		}
 }

@@ -1,6 +1,7 @@
 <%@include file="header.jsp" %>
+
 <div class="container">
-<h2>${sessionScope.Error} 
+<h2 style="color:red;">${sessionScope.Error} 
  <c:set var="Error" value="" scope="session"/></h2> 
  <hr>
 
@@ -9,32 +10,54 @@
                   <div class="form-group">
                     <label for="categoryName">Category Name</label>
                       <form:input type="text" class="form-control" path="categoryName" placeholder="Enter Category Name" maxlength="255"/>
-                      <form:errors path="categoryName"/>
+                      <form:errors cssStyle="color:red;" path="categoryName"/>
                   </div>
                   <div class="form-group">
                     <label for="categoryDesc">Category Description</label>
                       <form:input type="text" class="form-control" path="categoryDesc" placeholder="Enter Category Description" maxlength="255"/>
-                      <form:errors path="categoryDesc"/>
+                      <form:errors cssStyle="color:red;" path="categoryDesc"/>
                   </div>
                    
                   <button type="submit" class="btn btn-primary">Submit</button>
 </form:form>
 
 <hr>
-   
-        <div class="row">
-	       <div class="col-md-12">
-               <h4>Category List</h4>
-               <div>
-<label>Search:</label>
-<input type="text" ng-model="test"/>
 </div>
-<hr>
-                    <table id="mytable" class="w3-table-all w3-hoverable" >
+
+   
+ <div class="container"> 
+ <h4>CATEGORY LIST</h4> 
+ <hr> 
+     <div class="row">
+       <div class="col-xs-6">
+       
+             <label>Search</label>
+             <input type="text" ng-model="test"/>
+ </div>
+ 
+<div class="col-xs-6">
+ <div class="form-inline">
+           <label>Show</label>
+          <select class="form-control1" ng-model="maxsize" ng-init="maxsize=5">
+            <option ng-selected="true">5</option>
+            <option>10</option>
+            <option>15</option>
+            <option>20</option>  
+          </select>
+           <label>entries</label>
+           
+           </div>
+  </div>
+       </div>   
+           <hr>  
+        
+  </div> 
+ 
+       <div class="container"> 
+  <div class="table-responsive">
+                    <table id="mytable" class="table table-hover">
                     <thead>
-                    <tr class="w3-blue">
-                   
-<th ng-click="sort('categoryId')">#
+                     <th ng-click="sort('categoryId')">#
 <span class="glyphicon sort-icon" ng-show="sortKey=='categoryId'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
 </th>
 <th ng-click="sort('categoryName')">CategoryName
@@ -44,11 +67,11 @@
 <span class="glyphicon sort-icon" ng-show="sortKey=='categoryDesc'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
 </th>
 <th>MANAGE</th>
-</tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="x in abc | filter: test | orderBy:sortKey:reverse">
-      <td>{{x.categoryId}}</td>
+<tr dir-paginate="x in abc | filter: test | orderBy:sortKey:reverse | itemsPerPage: maxsize" pagination-id="Product">
+                        
+                       <td>{{x.categoryId}}</td>
       <td>{{x.categoryName}}</td>
       <td>{{x.categoryDesc}}</td>
       <td>
@@ -59,17 +82,20 @@
       		 <i class="glyphicon glyphicon-remove"></i></a>
       
       </td>
-                    </tr>
+                     </tr>
                     
 				   </tbody>
                    </table>
                    
-</div>
-</div>
+     <dir-pagination-controls  class="pull-right" max-size="5" pagination-id="Product" direction-links="true" boundary-links="true">
+                </dir-pagination-controls>
+                
+                </div>
 </div>
 
+
 <script>
-var app = angular.module('myApp', []);
+var app = angular.module('myApp', ['angularUtils.directives.dirPagination']);
  app.controller('myCtrl', function($scope) 
 		 {
     $scope.abc = ${categoriesjson};

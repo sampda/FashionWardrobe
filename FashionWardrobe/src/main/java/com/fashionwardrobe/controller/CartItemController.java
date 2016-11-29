@@ -1,9 +1,8 @@
 package com.fashionwardrobe.controller;
 
 import java.util.Date;
-
+import java.util.List;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,27 +32,31 @@ public class CartItemController
   @Autowired
   private ProductService productService;
 	
-  @RequestMapping("/deleteCartItem")
-	public String deleteCartItem(HttpSession session)
-	{
-	   int productId = (Integer) session.getAttribute("productId");
-	   productService.updateProductPlus(productId);
-	   cartItemService.deleteCartItem((Integer)session.getAttribute("cartItemId"));
-	   return "redirect:/";
-		
-	}
+
   
+  @SuppressWarnings("unchecked")
   @RequestMapping("/updateCartFlag")
   public String updateCartItemFlag(HttpSession session)
   {
-	  cartItemService.UpdateCartItemFlag((Integer) session.getAttribute("cartItemId"));
-	return "redirect:/";
+	  List<CartItem> k = (List<CartItem>) session.getAttribute("cartList");
+	  if(k==null || session.getAttribute("checkoutbuyNow") == "buyNow")
+	  {
+		  cartItemService.UpdateCartItemFlag((Integer) session.getAttribute("cartItemId"));  
+	  }
+	  else
+	  {
+	    for(CartItem l : k)
+        {
+		  cartItemService.UpdateCartItemFlag(l.getCartItemId());
+        }
+	  }
+	  return "redirect:/";
   }
   
   @RequestMapping(value="/deleteCartItem-{cartItemId}", method=RequestMethod.GET)
 	public String deleteCartItem(@PathVariable("cartItemId") int cartItemId,HttpSession session)
 	{
-	   int productId = (Integer) session.getAttribute("productId");
+	   int productId = (Integer) session.getAttribute("productId"+cartItemId);
 	   productService.updateProductPlus(productId);
 	   cartItemService.deleteCartItem(cartItemId);
 	   return "redirect:/";
@@ -71,8 +74,7 @@ public class CartItemController
 	  cartItem.setCartId(userId);
 	  cartItem.setFlag(false);
 	  cartItem.setProductId(productId);
-	  session.setAttribute("productId", productId);
-	  productId=(Integer) session.getAttribute("productId");
+	
 	  cartItem.setProductName(productService.getProductById(productId).getProductName());
 	  cartItem.setProductPrice(productService.getProductById(productId).getProductPrice());
 	  cartItem.setAmount(productService.getProductById(productId).getProductPrice());
@@ -85,16 +87,17 @@ public class CartItemController
       productService.updateProductMinus(productId);
       
       session.setAttribute("cartItemId", cartItem.getCartItemId());
-   
+      session.setAttribute("productId"+cartItem.getCartItemId(), cartItem.getProductId());
+  	
       
 	  return "redirect:/buyNowList-"+cartItem.getCartItemId();
 	  
   }
   
   @RequestMapping("/buyNowList-{cartItemId}")
-  public String cartListBuyNow(Model model,@PathVariable("cartItemId") int cartItemId)
+  public String buyNowList(Model model,@PathVariable("cartItemId") int cartItemId,HttpSession session)
   {
-	
+	session.setAttribute("checkoutbuyNow", "buyNow");
     CartItem p = cartItemService.cartItemList(cartItemId);
     Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     String j=gson.toJson(p);
@@ -111,4 +114,71 @@ public class CartItemController
 	  session.setAttribute("userDetails_userId", userId);
 	  return "redirect:/cart";
   }
+  
+  @RequestMapping("/addCart-{productId}")
+  public String addToCart(@ModelAttribute ("cartItem") CartItem cartItem,@PathVariable("productId") int productId,Model model,HttpSession session)
+  {
+	 
+	  Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+	  String user=authentication.getName();
+	  int userId= userService.getUserDetailsByName(user).getUserId();
+	  cartItem.setUserId(userId);
+	  cartItem.setCartId(userId);
+	  cartItem.setFlag(false);
+	  cartItem.setProductId(productId);
+	
+	  cartItem.setProductName(productService.getProductById(productId).getProductName());
+	  cartItem.setProductPrice(productService.getProductById(productId).getProductPrice());
+	  cartItem.setAmount(productService.getProductById(productId).getProductPrice());
+	  Date systemdate=new Date();
+	  cartItem.setOrderDate(systemdate);
+	  cartItem.setProductDiscount(productService.getProductById(productId).getProductDiscount());
+	  cartItem.setProductQuantity(1);
+	  cartItemService.addCartItem(cartItem);
+      
+      productService.updateProductMinus(productId);
+      
+      session.setAttribute("cartItemId", cartItem.getCartItemId());
+      session.setAttribute("productId"+cartItem.getCartItemId(), cartItem.getProductId());
+  	
+      return "redirect:/cartList";
+	  
+  }
+  
+  @RequestMapping("/cartList")
+  public String cartList(Model model,HttpSession session)
+  {
+	  session.setAttribute("checkoutbuyNow", "cartList");
+	  Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+	  String user=authentication.getName();
+	  int userId= userService.getUserDetailsByName(user).getUserId();
+      List<CartItem> p = cartItemService.cartList(userId);
+      session.setAttribute("cartList", p);
+      for(CartItem k : p)
+      {
+    	  session.setAttribute("productId"+k.getCartItemId(),k.getProductId());
+      }
+      Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+      String j=gson.toJson(p);
+      model.addAttribute("cartList",j);
+      return "cartList";
+  }
+  
+  @RequestMapping("/orderList")
+  public String orderList(Model model,HttpSession session)
+  {
+	  Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+	  String user=authentication.getName();
+	  int userId= userService.getUserDetailsByName(user).getUserId();
+      List<CartItem> p = cartItemService.orderedList(userId);
+      for(CartItem k : p)
+      {
+    	  session.setAttribute("productId"+k.getCartItemId(),k.getProductId());
+      }
+      Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+      String j=gson.toJson(p);
+      model.addAttribute("orderedList",j);
+      return "orderedList";
+  }
+  
 }

@@ -1,6 +1,6 @@
 <%@include file="header.jsp" %>
 <div class="container">
-<h2>${sessionScope.Error} 
+<h2 style="color:red;">${sessionScope.Error} 
  <c:set var="Error" value="" scope="session"/></h2> 
  <hr>
 <form:form method="POST" action="addsubCategory" modelAttribute="subcategory">
@@ -8,12 +8,12 @@
                   <div class="form-group">
                     <label for="subCategoryName">Subcategory Name</label>
                       <form:input type="text" class="form-control" path="subCategoryName" placeholder="Enter SubCategory Name" maxlength="255"/>
-                      <form:errors path="subCategoryName"/>
+                      <form:errors cssStyle="color:red;" path="subCategoryName"/>
                   </div>
                   <div class="form-group">
                     <label for="subCategoryDesc">Subcategory Description</label>
                       <form:input type="text" class="form-control" path="subCategoryDesc" placeholder="Enter SubCategory Description" maxlength="255"/>
-                      <form:errors path="subCategoryDesc"/>
+                      <form:errors cssStyle="color:red;" path="subCategoryDesc"/>
                   </div>
                    <div class="form-group">
                       <label for="CategoryName">Category Name</label>
@@ -24,21 +24,41 @@
 </form:form>
 
 <hr>
-
-<div>
-
-<div style="overflow-x:auto;">
-    <div class="container">
-        <div class="row">
-	       <div class="col-md-12">
-               <h4>Subcategory List</h4>
-                             <div>
-<label>Search</label>
-<input type="text" ng-model="test"/>
 </div>
-               <div class="table-responsive">
-                    <table id="mytable" class="table table-bordred table-striped" bgcolor="#00FF00">
+
+ <div class="container"> 
+ <h4>SUBCATEGORY LIST</h4> 
+ <hr> 
+     <div class="row">
+       <div class="col-xs-6">
+       
+             <label>Search</label>
+             <input type="text" ng-model="test"/>
+ </div>
+ 
+<div class="col-xs-6">
+ <div class="form-inline">
+           <label>Show</label>
+          <select class="form-control1" ng-model="maxsize" ng-init="maxsize=5">
+            <option ng-selected="true">5</option>
+            <option>10</option>
+            <option>15</option>
+            <option>20</option>  
+          </select>
+           <label>entries</label>
+           
+           </div>
+  </div>
+       </div>   
+           <hr>  
+        
+  </div> 
+ 
+       <div class="container"> 
+  <div class="table-responsive">
+                    <table id="mytable" class="table table-hover">
                     <thead>
+
                        <th ng-click="sort('subCategoryId')">SubCategoryId
 <span class="glyphicon sort-icon" ng-show="sortKey=='subCategoryId'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>                       
                        </th>
@@ -54,7 +74,7 @@
                        <th>MANAGE</th>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="x in abc | filter: test | orderBy:sortKey:reverse">
+    <tr dir-paginate="x in abc | filter: test | orderBy:sortKey:reverse | itemsPerPage: maxsize" pagination-id="Product">
                         <td>{{x.subCategoryId}}</td>
   					    <td>{{x.subCategoryName}}</td>
  					    <td>{{x.subCategoryDesc}}</td>
@@ -69,17 +89,15 @@
                     
 				   </tbody>
                    </table>
-                   
-</div>
-</div>
-</div>
+          <dir-pagination-controls  class="pull-right" max-size="5" pagination-id="Product" direction-links="true" boundary-links="true">
+                </dir-pagination-controls>
+                       
 </div>
 </div>
 
-</div>
-</div>
+
 <script>
-    var app = angular.module('myApp', []);
+    var app = angular.module('myApp', ['angularUtils.directives.dirPagination']);
     app.controller('myCtrl', function($scope) 
    		 {
        $scope.abc = ${subCategoryjson};

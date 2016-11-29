@@ -28,9 +28,12 @@
 						<intercept-url pattern="/subCategory" access="hasRole('ROLE_ADMIN')"/>
 						<intercept-url pattern="/supplier" access="hasRole('ROLE_ADMIN')"/>
 						<intercept-url pattern="/reg" access="hasRole('ROLE_ANONYMOUS')"/>
-						<intercept-url pattern="/cart" access="hasRole('ROLE_ANONYMOUS')"/>
+						<intercept-url pattern="/cart" access="hasRole('ROLE_USER')"/>
 						<intercept-url pattern="/login" access="hasRole('ROLE_ANONYMOUS')"/>
 						<intercept-url pattern="/userpanel" access="hasRole('ROLE_USER')"/>
+						<intercept-url pattern="/cartList" access="hasRole('ROLE_USER')"/>
+						<intercept-url pattern="/orderList" access="hasRole('ROLE_USER')"/>
+						<intercept-url pattern="/wishList" access="hasRole('ROLE_USER')"/>
 						<intercept-url pattern="/supplierPanel" access="hasRole('ROLE_SUPPLIER')"/>
 						<intercept-url pattern="/buyNow-{productId}" access="hasRole('ROLE_USER')"/>
 						<access-denied-handler error-page="/403"/>

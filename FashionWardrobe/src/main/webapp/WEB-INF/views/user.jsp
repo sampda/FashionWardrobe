@@ -33,7 +33,7 @@
       <td>{{x.userId}}</td>
       <td>{{x.username}}</td>
       <td>{{x.enabled}}</td>
-      <td><a href ="enableuser-{{x.user_id}}" class="btn btn-info">Enable/Disable</a></td>
+      <td><a href ="enableuser-{{x.userId}}" class="btn btn-info">Enable/Disable</a></td>
 </tr>
 </tbody>
 </table>

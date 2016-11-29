@@ -1,7 +1,7 @@
 <%@include file="header.jsp" %>
 
 <div class="container">
-   <div class="col-md-7 ">
+   <div class="col-md-6 col-md-offset-3">
       <div class="panel panel-default">
         <div class="panel-heading">  <h4 >User Profile</h4></div>
             <div class="panel-body2">
@@ -12,6 +12,7 @@
                           </div>
             <div class="clearfix"></div>
             <hr style="margin:5px 0 5px 0;">
+            
            <div class="col-sm-5 col-xs-6 tital " >Username:</div><div class="col-sm-7 col-xs-6 ">{{abc.username}}</div>
      
      <div class="clearfix"></div>
@@ -39,7 +40,7 @@
            </div>  <!-- /.box -->
         </div> 
         <div class="panel-footer">
-                        <a href="registrationform" data-original-title="Edit" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                        <a href="userEdit" data-original-title="Edit" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
                             <a href="home" data-original-title="Confirm" data-toggle="tooltip" type="button" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-ok"></i></a>
                       
                     </div>
@@ -50,7 +51,7 @@
 
  
 <div class="container">
-   <div class="col-md-7 ">
+   <div class="col-md-6 col-md-offset-3">
       <div class="panel panel-default">
         <div class="panel-heading">  <h4 >Shipping Details</h4></div>
             <div class="panel-body2">
@@ -86,7 +87,7 @@
            </div>  <!-- /.box -->
         </div> 
         <div class="panel-footer">
-                                <a href="confirmShippingDetails" data-original-title="Edit" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                                <a href="editShipping" data-original-title="Edit" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
                             <a href="home" data-original-title="Confirm" data-toggle="tooltip" type="button" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-ok"></i></a>
                       
                     </div>
@@ -96,7 +97,7 @@
   
   
   <div class="container">
-   <div class="col-md-7 ">
+   <div class="col-md-6 col-md-offset-3">
       <div class="panel panel-default">
         <div class="panel-heading">  <h4>Billing Details</h4></div>
             <div class="panel-body2">
@@ -132,7 +133,7 @@
            </div>  <!-- /.box -->
         </div> 
         <div class="panel-footer">
-                   <a href="billingDetails" data-original-title="Edit" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                   <a href="editBilling" data-original-title="Edit" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
                    <a href="home" data-original-title="Confirm" data-toggle="tooltip" type="button" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-ok"></i></a>
                     
                     </div>

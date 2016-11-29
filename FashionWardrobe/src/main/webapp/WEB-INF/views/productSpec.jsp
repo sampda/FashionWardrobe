@@ -22,12 +22,14 @@
                    </div>
                    <div class="form-group">
                       <label for="productSize">Product Size</label>
-                          <form:input type="text" class="form-control" path="productSize" placeholder="Enter Product Size"/>
+                         <form:select path="productSize"  multiple="true" class="form-control">
+                           <form:option value="S" label="S"/>
+                           <form:option value="L" label="L"/>
+                           <form:option value="XL" label="XL"/>
+                           <form:option value="XXL" label="XXL"/>
+                      </form:select>
                    </div>
-                   <div class="form-group">
-                      <label for="productShippingCost">Product Shipping Cost</label>
-                          <form:input type="text" class="form-control" path="productShippingCost" placeholder="Enter Product shipping cost"/>
-                   </div>
+                   
                    <div class="form-group">
                       <label for="productDesign">Product Design</label>
                           <form:input type="text" class="form-control" path="productDesign" placeholder="Enter Product Fabric" maxlength="255"/>

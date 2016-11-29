@@ -46,8 +46,10 @@
 </c:forEach><br />
 </div>
 
-<button name ="_eventId_submit" type="submit" class="btn btn-warning">Submit</button>
-<button name ="_eventId_cancel" type="submit" class="btn btn-warning">Cancel</button>
+
+<button name ="_eventId_back" type="submit" class="btn btn-warning"><i class="fa fa-caret-square-o-left" aria-hidden="true"></i> Back</button>
+
+<button name ="_eventId_submit" type="submit" class="btn btn-success"><i class="fa fa-check-square" aria-hidden="true"></i> Submit</button>
 </form:form>
 </div>
 

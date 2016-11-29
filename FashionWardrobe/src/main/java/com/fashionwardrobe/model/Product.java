@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.annotations.Expose;
@@ -25,13 +26,15 @@ public class Product implements Serializable
 	@Expose
     private int productId;
 	@Expose
+	@NotEmpty(message="Product Name Should Not Be Empty")
 	private String productName;
 	@Expose
+	@NotEmpty(message="Product Description Should Not Be Empty")
 	private String productDesc;
 	@Expose
 	private int productPrice;
 	@Expose
-	private int productQauntity;
+    private int productQauntity;
 	@Expose
 	private int productDiscount;
 	@Expose

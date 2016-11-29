@@ -61,16 +61,17 @@
             <form>
             <legend><span class="glyphicon glyphicon-globe"></span> Our office</legend>
             <address>
-                <strong>Twitter, Inc.</strong><br>
-                795 Folsom Ave, Suite 600<br>
-                San Francisco, CA 94107<br>
+                <strong>Novarris Fashion Trading Private Limited.</strong><br>
+                    Plot no. 82A,
+                    Sector 18, Gurgaon,
+                    Haryana - 122015<br>
                 <abbr title="Phone">
                     P:</abbr>
-                (123) 456-7890
+                7042827160
             </address>
             <address>
-                <strong>Full Name</strong><br>
-                <a href="mailto:#">first.last@example.com</a>
+                <strong>Email Id:</strong><br>
+                <a href="mailto:fashionwardrobeshopping@gmail.com">fashionwardrobeshopping@gmail.com</a>
             </address>
             </form>
         </div>

@@ -133,8 +133,8 @@ Haryana - 122015</p>
 
 				<div class="design">
 
-					 <a href="home">FashionWardrobe.com </a> |  <a href="contact">Contact</a> | <a href="contact">About</a>
-<a id="back-to-top" href="#" class="btn btn-info btn-sm back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
+					 <a href="home">FashionWardrobe.com </a> |  <a href="contact">Contact</a> | <a href="contact">About</a> <a id="back-to-top" href="#" class="btn btn-info btn-sm back-to-top" role="button"><span class="glyphicon glyphicon-chevron-up"></span></a>
+
  
 				</div>
 
@@ -164,7 +164,7 @@ $(document).ready(function(){
            return false;
        });
        
-       $('#back-to-top').tooltip('show');
+      
 
 });
 </script>

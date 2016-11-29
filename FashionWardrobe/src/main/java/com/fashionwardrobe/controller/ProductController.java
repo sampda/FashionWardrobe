@@ -5,9 +5,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,8 +65,18 @@ public class ProductController
 	}
 	
 	@RequestMapping(value="/add/product", method=RequestMethod.POST)
-	public String addproduct(@ModelAttribute("product") Product product)
+	public String addproduct(@Validated @ModelAttribute("product") Product product, BindingResult result, HttpSession session, Model model)
 	{
+		if(result.hasErrors())
+		{
+			
+			model.addAttribute("listproduct",this.productService.listproduct());
+			model.addAttribute("stringProduct",this.productService.stringProduct());
+			model.addAttribute("listSupplier",this.supplierService.listSupplier());
+			model.addAttribute("listsubCategory",this.subcategoryService.listsubCategory());
+			model.addAttribute("listCategory",this.categoryService.listCategory());
+			return "redirect:/"+session.getAttribute("page");
+		}
 		
 		Category category = categoryService.getIdByName(product.getCategory().getCategoryName());
 		categoryService.addCategory(category);
@@ -83,7 +97,7 @@ public class ProductController
 		Date systemdate=new Date();
 		product.setDate(systemdate);
 		
-		this.productService.addproduct(product);
+		productService.addproduct(product);
 		
 		
 		
@@ -104,7 +118,7 @@ public class ProductController
 			System.out.println("ERROR e");
 		}
 		
-		return "redirect:/product";
+		return "redirect:/"+session.getAttribute("page");
 	}
 	
 	

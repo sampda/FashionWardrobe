@@ -6,7 +6,7 @@ import com.fashionwardrobe.model.Category;
 
 public interface CategoryDao 
 {
-	public void createCategory(Category category);
+	public boolean createCategory(Category category);
 	public List<Category> listCategories();
 	public String stringCategory();
 	public Category getIdByName(String categoryName);

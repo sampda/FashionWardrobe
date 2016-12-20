@@ -61,7 +61,7 @@
             <form>
             <legend><span class="glyphicon glyphicon-globe"></span> Our office</legend>
             <address>
-                <strong>Novarris Fashion Trading Private Limited.</strong><br>
+                <strong>Fashion Wardrobe Private Limited.</strong><br>
                     Plot no. 82A,
                     Sector 18, Gurgaon,
                     Haryana - 122015<br>

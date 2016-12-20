@@ -9,27 +9,27 @@
                      
 </div>
 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">Password<span style="color:red;"> *</span></label>
                   <form:input type="password" class="form-control" path="password" placeholder="Enter password"/>
                       
 </div>
 <div class="form-group">
-                    <label for="email_id">Email_Id</label>
+                    <label for="email_id">Email_Id<span style="color:red;"> *</span></label>
                     <form:input type="text" class="form-control" path="emailId" placeholder="Enter email_id" />
                       
 </div>
 <div class="form-group">
-                    <label for="firstName">First Name</label>
+                    <label for="firstName">First Name<span style="color:red;"> *</span></label>
                     <form:input type="text" class="form-control" path="firstname" placeholder="Enter First Name" />
                       
 </div>
 <div class="form-group">
-                    <label for="lastName">Last Name</label>
+                    <label for="lastName">Last Name<span style="color:red;"> *</span></label>
                     <form:input type="text" class="form-control" path="lastname" placeholder="Enter Last Name" />
                       
 </div>
 <div class="form-group">
-                    <label for="contact_no">Contact Number</label>
+                    <label for="contact_no">Contact Number<span style="color:red;"> *</span></label>
                     <form:input type="text" class="form-control" path="contactno" placeholder="Enter Contact Number" />
                       
 </div>

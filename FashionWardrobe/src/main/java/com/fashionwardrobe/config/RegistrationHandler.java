@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 //import org.springframework.mail.SimpleMailMessage;
 //import org.springframework.mail.javamail.JavaMailSender;
@@ -89,7 +90,7 @@ public class RegistrationHandler
 		{
 			if(k.getEmailId().equals(userDetails.getEmailId()))
 			{
-				messageContext.addMessage(new MessageBuilder().error().source("email_id").defaultText(" It Already Exists. Please Try Another").build());
+				messageContext.addMessage(new MessageBuilder().error().source("emailId").defaultText(" It Already Exists. Please Try Another").build());
 				status = "failure";
 			break;
 			}
@@ -173,10 +174,68 @@ public class RegistrationHandler
 	return status;	
   }
 
+  public String validateSupplierDetails(UserDetails userDetails, Supplier supplier, MessageContext messageContext )
+  {
+	String status = "success";
+	
+	if(supplier.getCompanyName().isEmpty())
+	{
+		messageContext.addMessage(new MessageBuilder().error().source("companyName").defaultText("Please Fill Company Name").build());
+		
+		status = "failure";
+	}
+	if(supplier.getSupplierDescription().isEmpty())
+	{
+		messageContext.addMessage(new MessageBuilder().error().source("supplierDescription").defaultText("Please Fill Supplier Description").build());
+		
+		status = "failure";
+	}
+	if(supplier.getCity().isEmpty())
+	{
+		messageContext.addMessage(new MessageBuilder().error().source("city").defaultText(" Please Fill City").build());
+		
+		status = "failure";
+	}
+	if(supplier.getState().isEmpty())
+	{
+		messageContext.addMessage(new MessageBuilder().error().source("state").defaultText(" Please Fill State").build());
+		
+		status = "failure";
+	}
+	if(supplier.getAddress().isEmpty())
+	{
+		messageContext.addMessage(new MessageBuilder().error().source("address").defaultText(" Please Fill Address").build());
+		
+		status = "failure";
+	}
+	
+	if(supplier.getDistrict().isEmpty())
+	{
+		messageContext.addMessage(new MessageBuilder().error().source("district").defaultText(" Please Fill District").build());
+		
+		status = "failure";
+	}
+	if(supplier.getPincode().isEmpty())
+	{
+		messageContext.addMessage(new MessageBuilder().error().source("pincode").defaultText(" Please Fill Pincode").build());
+		
+		status = "failure";
+	}
+	if(supplier.getLandmark().isEmpty())
+	{
+		messageContext.addMessage(new MessageBuilder().error().source("landmark").defaultText(" Please Fill Landmark").build());
+		
+		status = "failure";
+	}
+	
+	return status;	
+  }
+
   public String addDetails(UserDetails userDetails,UserRole userRole, ShippingAddress shippingAddress, BillingAddress billingAddress, MessageContext messageContext ){
-//	try{
+	try{
 
 	userService.saveOrUpdate(userDetails);	
+	userDetails.setUsername(userDetails.getUsername().trim());
 	userDetails.setShippingAddress(shippingAddress);
 	userDetails.setBillingAddress(billingAddress);
 	userDetails.setUserRole(userRole);
@@ -193,27 +252,30 @@ public class RegistrationHandler
 	userService.saveOrUpdateBilling(billingAddress);
 	userService.saveOrUpdateUserRole(userRole);
 	
-//	//creates a simple e-mail object
-//	SimpleMailMessage email = new SimpleMailMessage();
-//	email.setTo(userDetails.getEmailId());
-//	email.setSubject("Welcome To Fashion Wardrobe!");
-//	email.setText("Thank");
-//
-//	mailSender.send(email);
+	//creates a simple e-mail object
+	SimpleMailMessage email = new SimpleMailMessage();
+	email.setTo(userDetails.getEmailId());
+	email.setSubject("Welcome To Fashion Wardrobe!");
+	email.setText("Thank");
+
+	mailSender.send(email);
 	
-	
-//	catch (Exception e) {
-//		messageContext.addMessage(new MessageBuilder().error().source("dberror").defaultText("Server Down! Try again Later.").build());
-//		return "failure";	
-//	}
+	}
+	catch (Exception e) {
+		messageContext.addMessage(new MessageBuilder().error().source("dberror").defaultText("Server Down! Try again Later.").build());
+		return "success";	
+	}
 	return "success";
 	
 }
 
-public String addDetailsSupplier(UserDetails userDetails,UserRole userRole,Supplier supplier, MessageContext messageContext ){
-//	try{
-//	userDetails.setRoleId(userRole.getRoleId());
+public String addDetailsSupplier(UserDetails userDetails,UserRole userRole,Supplier supplier, MessageContext messageContext )
+{
+	try
+	{
+
 	userService.saveOrUpdate(userDetails);	
+	userDetails.setUsername(userDetails.getUsername().trim());
 	userDetails.setUserRole(userRole);
 	userDetails.setSupplier(supplier);
 	
@@ -225,11 +287,11 @@ public String addDetailsSupplier(UserDetails userDetails,UserRole userRole,Suppl
 	userService.saveOrUpdateUserRole(userRole);
 	userService.saveOrUpdateSupplier(supplier);
 	
-//	}
-//	catch (Exception e) {
-//		messageContext.addMessage(new MessageBuilder().error().source("dberror").defaultText("Server Down! Try again Later.").build());
-//		return "failure";	
-//	}
+	}
+	catch (Exception e) {
+		messageContext.addMessage(new MessageBuilder().error().source("dberror").defaultText("Server Down! Try again Later.").build());
+		return "success";	
+	}
 	return "success";
 	
 }

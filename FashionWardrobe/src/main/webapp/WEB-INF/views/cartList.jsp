@@ -80,7 +80,7 @@
                      
                     
                      <td>
-                     <a href="checkout" class="btn btn-lg btn-primary"><i class="fa fa-credit-card"></i> Checkout</a>
+                     <div ng-if="resultValue != ''"><a href="checkout" class="btn btn-lg btn-primary"><i class="fa fa-credit-card"></i> Checkout</a></div>
                     
       </td>
                      

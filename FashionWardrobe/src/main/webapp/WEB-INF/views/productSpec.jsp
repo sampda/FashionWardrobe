@@ -1,6 +1,10 @@
 <%@include file="header.jsp" %>
 
 <div class="container">
+<div class="form-signin" style="max-width:700px;">
+<h4>Add Product Specification</h4>  
+ <hr>
+
 
     <form:form method="POST" action="addprodspec-${productId}" modelAttribute="productSpecification">
                  <form:input path="productId" hidden="true"/>
@@ -47,5 +51,5 @@
                   <button type="submit" class="btn btn-primary">Submit</button>
       </form:form>
       </div>
-
+</div>
 <%@include file="footer.jsp" %>

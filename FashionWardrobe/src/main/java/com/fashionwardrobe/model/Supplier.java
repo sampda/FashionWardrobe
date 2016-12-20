@@ -6,10 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-
 import org.hibernate.validator.constraints.NotEmpty;
-
 import com.google.gson.annotations.Expose;
 
 @SuppressWarnings("serial")
@@ -47,8 +46,8 @@ public class Supplier implements Serializable
 	@Expose
 	private String companyUrl;
 	
-	
-	@OneToOne
+    @OneToOne
+    @JoinColumn(name="userId")
 	private UserDetails userDetails;
 	
 	

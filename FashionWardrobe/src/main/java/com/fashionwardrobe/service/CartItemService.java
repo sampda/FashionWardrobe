@@ -50,4 +50,10 @@ public class CartItemService
 		{
 			return cartItemDaoImpl.orderedList(userId);
 		}
+		
+		@Transactional
+		public List<CartItem> cartItemListJson(int cartItemId)
+		{
+			return cartItemDaoImpl.cartItemListJson(cartItemId);
+		}
 }

@@ -3,12 +3,12 @@
 <div class="container">
    <div class="col-md-6 col-md-offset-3">
       <div class="panel panel-default">
-        <div class="panel-heading">  <h4 >User Profile</h4></div>
+        <div class="panel-heading">  <h4 style="margin-top: 10px;;margin-bottom: 15px;">User Profile</h4></div>
             <div class="panel-body2">
                  <div class="box box-info">
                       <div class="box-body">
          				  <div class="col-sm-12">
-                                  <h4 style="color:#00b1b1;">${pageContext.request.userPrincipal.name}</h4>
+                                  <h4 style="color:#01579B;">${pageContext.request.userPrincipal.name}</h4>
                           </div>
             <div class="clearfix"></div>
             <hr style="margin:5px 0 5px 0;">
@@ -53,7 +53,7 @@
 <div class="container">
    <div class="col-md-6 col-md-offset-3">
       <div class="panel panel-default">
-        <div class="panel-heading">  <h4 >Shipping Details</h4></div>
+        <div class="panel-heading">  <h4 style="margin-top: 10px;;margin-bottom: 15px;">Shipping Details</h4></div>
             <div class="panel-body2">
                  <div class="box box-info">
                       <div class="box-body">
@@ -99,7 +99,7 @@
   <div class="container">
    <div class="col-md-6 col-md-offset-3">
       <div class="panel panel-default">
-        <div class="panel-heading">  <h4>Billing Details</h4></div>
+        <div class="panel-heading">  <h4 style="margin-top: 10px;;margin-bottom: 15px;">Billing Details</h4></div>
             <div class="panel-body2">
                  <div class="box box-info">
                       <div class="box-body">

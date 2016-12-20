@@ -60,7 +60,7 @@ public class ProductController
 		model.addAttribute("listSupplier",this.supplierService.listSupplier());
 		model.addAttribute("listsubCategory",this.subcategoryService.listsubCategory());
 		model.addAttribute("listCategory",this.categoryService.listCategory());
-		
+	
 		return "product";
 	}
 	
@@ -75,6 +75,7 @@ public class ProductController
 			model.addAttribute("listSupplier",this.supplierService.listSupplier());
 			model.addAttribute("listsubCategory",this.subcategoryService.listsubCategory());
 			model.addAttribute("listCategory",this.categoryService.listCategory());
+//			model.addAttribute("top6Products",this.productService.top6Products());
 			return "redirect:/"+session.getAttribute("page");
 		}
 		
@@ -100,8 +101,7 @@ public class ProductController
 		productService.addproduct(product);
 		
 		
-		
-		String path="F:\\FashionWardrobe\\src\\main\\webapp\\resources\\images\\product";
+		String path="C:\\FashionWardrobe\\src\\main\\webapp\\resources\\images\\product";
 		path=path+String.valueOf(product.getProductId())+".jpg";
 		try
 		{
@@ -135,32 +135,43 @@ public class ProductController
 	}
 	
 	@RequestMapping(value="/deleteProduct-{productId}", method=RequestMethod.GET)
-	public String deleteProduct(@PathVariable("productId") int productId )
+	public String deleteProduct(@PathVariable("productId") int productId , HttpSession session)
 	{
 		
 		productService.deleteProduct(productId);
 		File file = new File("F:\\FashionWardrobe\\src\\main\\webapp\\resources\\images\\product"+productId+".jpg");
 		file.delete();
-		return "redirect:/product";
+		return "redirect:/"+session.getAttribute("page");
 		
 	}
 	
-	@RequestMapping("/viewproduct-{productId}")
-	public ModelAndView productView(@ModelAttribute("product") Product product,@PathVariable("productId") int productId)
-	{
-		Product p = productService.getProductById(productId);
-		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		String j=gson.toJson(p);
-		ModelAndView model=new ModelAndView("viewproduct");
-		model.addObject("product", j);
-		return model;
-		
-	}
+//	@RequestMapping("/viewproduct-{productId}")
+//	public ModelAndView productView(@ModelAttribute("product") Product product,@PathVariable("productId") int productId)
+//	{
+//		Product p = productService.getProductById(productId);
+//		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+//		String j=gson.toJson(p);
+//		ModelAndView model=new ModelAndView("viewproduct");
+//		model.addObject("product", j);
+//		return model;
+//		
+//	}
 	
 	@RequestMapping("/viewfullproduct-{productId}")
 	public ModelAndView productFullView(@ModelAttribute("productView") ProductView productView,@PathVariable("productId") int productId)
 	{
 		ProductView p = productFullViewService.getProductViewById(productId);
+		try
+		{
+			p.getProductId();
+		}
+		catch(NullPointerException e)
+		{
+			
+			ModelAndView model=new ModelAndView("404");
+			
+			return model;
+		}
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 		String j=gson.toJson(p);
 		ModelAndView model=new ModelAndView("viewproduct");
@@ -170,10 +181,10 @@ public class ProductController
 	}
 
 	@RequestMapping("/enableproduct-{productId}")
-	public String enableUser(@PathVariable("productId") int productId)
+	public String enableUser(@PathVariable("productId") int productId, HttpSession session)
 	{
 		productService.UpdateProduct(productId);
-		return "redirect:/product";
+		return "redirect:/"+session.getAttribute("page");
 	}
 	
 	@RequestMapping("/productdisplay")

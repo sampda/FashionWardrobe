@@ -16,11 +16,11 @@ public class CategoryDaoImpl implements CategoryDao
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	public void createCategory(Category category)
+	public boolean createCategory(Category category)
 	{
 		
 		sessionFactory.getCurrentSession().saveOrUpdate(category);
-	
+	    return true;
 	}
 	
 	public void deleteCategory(int categoryId)

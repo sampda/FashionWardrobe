@@ -65,5 +65,14 @@ public class CartItemDaoImpl implements CartItemDao
 	}
 
 	
+	@SuppressWarnings("unchecked")
+	public List<CartItem> cartItemListJson(int cartItemId) 
+	{
+		String sql = "from CartItem where cartItemId="+cartItemId;
+		List<CartItem> list = sessionFactory.getCurrentSession().createQuery(sql).getResultList();
+		return list;
+		
+	}
+	
 
 }

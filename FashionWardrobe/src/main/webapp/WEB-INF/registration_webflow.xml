@@ -31,10 +31,15 @@
 	</view-state>
 <!-- GOES TO SUPPLIER FORM	 -->
 	<view-state id="supplier" view="supplierDetails" model="supplier">
-		<transition on="submit" to="confirmSupplierDetails"/>
+		<transition on="submit" to="validateSupplierDetails"/>
 		<transition on="back" to="choosetype"/>
 		<transition on="cancel" to="cancel"/>
 	</view-state>
+	<action-state id="validateSupplierDetails">
+	<evaluate expression="registrationHandler.validateSupplierDetails(flowScope.userDetails, supplier, messageContext)"></evaluate>
+	   <transition on="success" to="addSupplierDetails"></transition>
+	   <transition on="failure" to="supplier" />
+	</action-state>
 	<action-state id="addSupplierDetails">
 	<evaluate expression="registrationHandler.addSupplierDetails(flowScope.userDetails, supplier)"></evaluate>
 		<transition on="success" to="confirmSupplierDetails" />
@@ -85,7 +90,7 @@
 	
 	<action-state id="saveUser">
 	<evaluate expression="userService.saveOrUpdate(userDetails)" result="userDetails"></evaluate>
-	<transition  to="success"></transition>
+	<transition  to="regsuccess"></transition>
 	
 	</action-state>
 	
@@ -94,14 +99,23 @@
 		<transition on="edit" to="start"/>
 		<transition on="cancel" to="cancel"/>
 	</view-state>
+	
 	<action-state id="addDetailsSupplier">
 	<evaluate expression="registrationHandler.addDetailsSupplier(flowScope.userDetails,userRole,supplier,messageContext)"></evaluate>
 		<transition on="success" to="saveUser" />
 		<transition on="failure" to="confirmDetails" />
 	</action-state>
-
+	
+     <view-state id="regsuccess" view="regsuccesspage" model="userDetails">
+		<transition to="success"/>
+		</view-state>
+	
 	<end-state id="success" view="externalRedirect:contextRelative:/login"/>
 	<end-state id="cancel" view="externalRedirect:contextRelative:/home"/>
+	<end-state id="errorpage" view="externalRedirect:contextRelative:/404"/>
 	
-
+ <global-transitions>
+   <transition on-exception="java.lang.Exception" to="errorpage"/>
+ </global-transitions>
+ 
 </flow>

@@ -1,6 +1,8 @@
 <%@include file="header.jsp" %>
 <div class="container">
+<div class="form-signin" style="max-width:600px;">
 <h4>Confirm Shipping Address</h4>
+<hr>
 <form:form modelAttribute="shippingAddress">
 <div class="form-group">
                     <label for="state">State</label>
@@ -27,10 +29,12 @@
                     <label for="pincode">Pincode</label>
                       <input type="text" class="form-control" name="contactNo" placeholder="${shippingAddress.pincode}" readonly/>
 </div>
-<button name="_eventId_edit" type="submit" class="btn btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit</button>
 <button name ="_eventId_cancel" type="submit" class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>
-<button name ="_eventId_submit" type="submit" class="btn btn-success"><i class="fa fa-check-square" aria-hidden="true"></i> Submit</button>
+<button name="_eventId_edit" type="submit" class="btn btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit</button>
+
+<button name ="_eventId_submit" type="submit" class="btn btn-success pull-right"><i class="fa fa-check-square" aria-hidden="true"></i> Submit</button>
 </form:form>
+</div>
 </div>
 
 <%@include file="footer.jsp" %>

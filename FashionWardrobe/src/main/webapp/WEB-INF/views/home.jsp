@@ -1,7 +1,7 @@
 <%@include file="header.jsp" %>
 
 
-<div class="container1" style="width:100%">
+<div class="container top" style="width:100%">
     <div class="row">
         <div class="col-md-12">
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -13,18 +13,18 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="item active">
-                        <img src="resources/images/carouselimg5.jpg" style="width:100%;max-height:500px;">
+                        <a href="productdisplay?search=Kurtas%20&%20Kurtis"><img src="resources/images/carouselimg5.jpg" style="width:100%;max-height:500px;"></a>
                     </div>
                     <div class="item">
-                        <img src="resources/images/carouselimg6.jpg" style="width:100%;max-height:500px;">
+                        <a href="productdisplay?search=Polos%20&%20Tees"><img src="resources/images/carouselimg6.jpg" style="width:100%;max-height:500px;"></a>
                         
                     </div>
                     <div class="item">
-                        <img src="resources/images/carouselimg7.jpg" style="width:100%;max-height:500px;">
+                        <a href="productdisplay?search=Trousers%20&%20Jeans"><img src="resources/images/carouselimg7.jpg" style="width:100%;max-height:500px;"></a>
                         
                     </div>
                     <div class="item">
-                        <img src="resources/images/carouselimg9.jpg" style="width:100%;max-height:500px;">
+                       <a href="productdisplay?search=Sarees%20&%20Dress%20%20Material"><img src="resources/images/carouselimg9.jpg" style="width:100%;max-height:500px;"></a>
                         
                     </div>
                 </div>
@@ -36,84 +36,86 @@
             
         </div>
     </div>
-</div>
+ </div> 
 <div id="push">
 </div>
 
 <hr>
 
 <div class="container">
-<h4>TRENDING PRODUCTS</h4>
-	<div class="row">
-    	<!-- BEGIN PRODUCTS -->
-  		<div ng-repeat="x in abc" class="col-md-3 col-sm-6">
-    		<span class="thumbnail">
-      			<a href="viewfullproduct-{{x.productId}}"><img src="resources/images/product{{x.productId}}.jpg" style="width:200px;height:250px;"></a>
-      			<hr>
-      			<p style="min-height:50px; text-align:center;">{{x.productName}}</p>
-      			<div ng-if="x.productDiscount == 0">
-      		    <h4 style="text-align:center;" class="price"><i class="fa fa-inr"></i>{{x.productPrice}}</h4>	
+     <h4>TRENDING NOW</h4>
+    <div class='row'>
+
+        <!--Boxes-->
+        
+        <div ng-repeat="x in abc | orderBy: 'productId':true" class="col-xs-12 col-sm-6 col-md-3">
+            <div class="list-quotes" >
+                
+               
+               
+                <a href="viewfullproduct-{{x.productId}}">
+                    <img src="resources/images/product{{x.productId}}.jpg" style="width:100%;height:360px;">
+                    <h1>{{x.productName}} 
+                    <div ng-if="x.productDiscount != 0 && x.productQauntity == 0">
+                    <span class="label label-warning">Out Of Stock</span>
+                    </div> 
+                    <div ng-if="x.productQauntity == 0 && x.productDiscount == 0">
+                    <span class="label label-warning">Out Of Stock</span>
+                    </div>
+                    <div ng-if="x.productQauntity != 0 && x.productDiscount != 0">
+                    <span class="label label-danger">Sale!!!</span>
+                    </div>
+                    </h1>
+                </a>
+               
+               
+               
+                
+               
+                    <div class="quotes">
+                    <div ng-if="x.productQauntity != 0">
+                    <a href="buyNow-{{x.productId}}?userId=1"><span class="glyphicon year glyphicon-credit-card" data-toggle="tooltip" data-placement="left" title="Buy Now"></span></a>
+                    <a href="addCart-{{x.productId}}-1"><span class="glyphicon cat-name glyphicon-shopping-cart" data-toggle="tooltip" data-placement="right" title="Add To Cart"></span></a>
+                    <div ng-if="x.productDiscount == 0">
+      	          	   	<p><span class="pricing-list-v4-price-sign">  <i class="fa fa-inr"></i>{{x.productPrice}}</span>
+      	          	
+                       <a href="wishList-{{x.productId}}"><span class="glyphicon glyphicon-heart pull-right" data-toggle="tooltip" data-placement="left" style="z-index:99" title=" Add To Wishlist"></span></a>
+                         </p>
+      		      </div>
+      		    <div ng-if="x.productDiscount != 0">
+      		     	<p><span class="pricing-list-v4-price-sign"><i class="fa fa-inr"></i><del>{{x.productPrice}}</del> {{x.productDiscount}} ({{Math.round((((x.productPrice - x.productDiscount)/ x.productPrice) * 100))}}) % off!</span>
+      		     	      	      
+      		     	 <a href="wishList-{{x.productId}}"><span class="glyphicon glyphicon-heart pull-right" data-toggle="tooltip" data-placement="left" style="z-index:99" title=" Add To Wishlist"></span></a>
+                         </p>
+      		     	
+                    
+                    </div>
+                    </div>
+                    <div ng-if="x.productQauntity == 0">
+                    <a href="buyNow-{{x.productId}}?userId=1"><span class="glyphicon year glyphicon-credit-card" data-toggle="tooltip" data-placement="left" title="Buy Now"></span></a>
+                    <a href="addCart-{{x.productId}}"><span class="glyphicon cat-name glyphicon-shopping-cart" data-toggle="tooltip" data-placement="right" title="Add To Cart"></span></a>
+                    
+                    <div ng-if="x.productDiscount == 0">
+      	          	   	<p>  <span class="pricing-list-v4-price-sign"><i class="fa fa-inr"></i>{{x.productPrice}}
+      	          	   	OUT OF STOCK!!!</span>
+                       <a href="wishList-{{x.productId}}"><span class="glyphicon glyphicon-heart pull-right" data-toggle="tooltip" data-placement="left" style="z-index:99" title=" Add To Wishlist"></span></a>
+                         </p>
       		    </div>
       		    <div ng-if="x.productDiscount != 0">
-      		     <h4 style="text-align:center;" class="price"><i class="fa fa-inr"></i>{{x.productDiscount}}</h4>	
+      		     	<p><i class="fa fa-inr"></i><strike>{{x.productPrice}}</strike> {{x.productDiscount}} (-{{Math.round((((x.productPrice - x.productDiscount)/ x.productPrice) * 100))}}) % off!
+      		     	      	          	   	OUT OF STOCK!!!
+      		     	 <a href="wishList-{{x.productId}}"><span class="glyphicon glyphicon-heart pull-right" data-toggle="tooltip" data-placement="left" style="z-index:99" title=" Add To Wishlist"></span></a>
+                         </p>
+      		     	
       		    </div>
-      		  <div ng-if="x.productQauntity != 0">
-      		    <a class="btn icon-btn btn-primary" href="buyNow-{{x.productId}}?userId=1" data-toggle="tooltip" data-placement="bottom" title="Buy Now">
-      		 <span class="glyphicon btn-glyphicon glyphicon-credit-card img-circle text-primary"></span></a>
-      	     <a class="btn icon-btn btn-primary" href="wishList-{{x.productId}}" data-toggle="tooltip" data-placement="bottom" title="Add To WishList">
-      	     <span class="glyphicon btn-glyphicon glyphicon-heart img-circle text-primary"></span></a>
-      	     <a class="btn icon-btn btn-primary" href="addCart-{{x.productId}}" data-toggle="tooltip" data-placement="bottom" title="Add To Cart">
-      	     <span class="glyphicon btn-glyphicon glyphicon-shopping-cart img-circle text-primary"></span></a> 
-    		
-                   </div>		
-              <div ng-if="x.productQauntity == 0">
-
-      		 <a class="btn icon-btn btn-primary" href="wishList-{{x.productId}}" data-toggle="tooltip" data-placement="bottom" title="Add To WishList">
-      	     <span class="glyphicon btn-glyphicon glyphicon-heart img-circle text-primary"></span></a>
-      	     
-    		</div>
-  		</div>
-  		
-  		
-  		<!-- END PRODUCTS -->
-	</div>
-</div>
-
-<hr>
-
-<div class="container">
-<h4>FEATURED PRODUCTS</h4>
-	<div class="row">
-    	<!-- BEGIN PRODUCTS -->
-  		<div class="col-md-3 col-sm-6">
-    		<span class="thumbnail">
-      			<img src="http://placehold.it/500x400" alt="...">
-      			<h4>Product Title</h4>
-      			<div class="ratings">
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star-empty"></span>
+                   </div>     
+                       
                 </div>
-      			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-      			<hr class="line">
-      			<div class="row">
-      				<div class="col-md-6 col-sm-6">
-      					<p class="price">$29,90</p>
-      				</div>
-      				<div class="col-md-6 col-sm-6">
-      					<button class="btn btn-success right" > BUY ITEM</button>
-      				</div>
-      				
-      			</div>
-    		</span>
-  		</div>
-  		
-  		<!-- END PRODUCTS -->
-	</div>
+            </div>
+        </div>
+        
 </div>
-
+</div>
 
 <script>
 $(document).ready( function() {
@@ -126,11 +128,37 @@ var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope) 
 		 {
    $scope.abc = ${stringFullProductEnabled};
+   $scope.Math = window.Math;
 		 });
 		 
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip(); 
 });
+
+(function(){
+
+	  $('#itemslider').carousel({ interval: 3000 });
+	}());
+
+	(function(){
+	  $('.carousel-showmanymoveone .item').each(function(){
+	    var itemToClone = $(this);
+
+	    for (var i=1;i<6;i++) {
+	      itemToClone = itemToClone.next();
+
+
+	      if (!itemToClone.length) {
+	        itemToClone = $(this).siblings(':first');
+	      }
+
+
+	      itemToClone.children(':first-child').clone()
+	        .addClass("cloneditem-"+(i))
+	        .appendTo($(this));
+	    }
+	  });
+	}());
 
 </script>
 <%@include file="footer.jsp" %>

@@ -60,20 +60,26 @@ public class ProductService
 	}
 	
 	@Transactional
-	public void updateProductMinus(int productId) 
+	public void updateProductMinus(int productId,int productQauntity) 
 	{
-		productDaoImpl.updateProductMinus(productId);
+		productDaoImpl.updateProductMinus(productId,productQauntity);
 	}
 	
 	@Transactional
-	public void updateProductPlus(int productId) 
+	public void updateProductPlus(int productId,int productQauntity) 
 	{
-		productDaoImpl.updateProductPlus(productId);
+		productDaoImpl.updateProductPlus(productId,productQauntity);
 	}
 	
 	@Transactional
 	public List<Product> getProductBySupId(int supplierId)
 	{
 		return productDaoImpl.getProductIdById(supplierId);
+	}
+	
+	@Transactional
+	public String supplierRequest()
+	{
+		return productDaoImpl.supplierRequest();
 	}
 }

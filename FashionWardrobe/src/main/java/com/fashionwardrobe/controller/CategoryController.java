@@ -66,7 +66,8 @@ public class CategoryController {
 		catch(DataIntegrityViolationException e)
 		{
 			HttpSession session= request.getSession();
-			session.setAttribute("Error", "Category Cannot Be Deleted!!Constraint Violation");
+			session.setAttribute("Error", "<div class=\"alert\"><span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span>Category Cannot Be Deleted!!Constraint Violation</div>");
+			 
 		}
 		return "redirect:/categories";
 		

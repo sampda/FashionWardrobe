@@ -79,20 +79,21 @@ public class ProductDaoImpl implements ProductDao
 		
 	}
 
-	public void updateProductMinus(int productId) 
+	public void updateProductMinus(int productId, int productQauntity) 
 	{
-		sessionFactory.getCurrentSession().createQuery("update Product set productQauntity = productQauntity - 1 where productId="+productId ).executeUpdate();
+		sessionFactory.getCurrentSession().createQuery("update Product set productQauntity = productQauntity - "+productQauntity+" where productId="+productId ).executeUpdate();
 		
 	}
 
-	public void updateProductPlus(int productId) 
+	public void updateProductPlus(int productId, int productQauntity) 
 	{
-		sessionFactory.getCurrentSession().createQuery("update Product set productQauntity = productQauntity + 1 where productId="+productId ).executeUpdate();
+		sessionFactory.getCurrentSession().createQuery("update Product set productQauntity = productQauntity + "+productQauntity+" where productId="+productId ).executeUpdate();
 		
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Product> getProductIdById(int supplierId) {
+	public List<Product> getProductIdById(int supplierId) 
+	{
 		String query ="from Product where supplierId="+supplierId;
 		List<Product> productList = sessionFactory.getCurrentSession().createQuery(query).getResultList();		
 		if(productList!=null && !productList.isEmpty())
@@ -102,4 +103,15 @@ public class ProductDaoImpl implements ProductDao
 		else return null;
 		
 	}
+
+	@SuppressWarnings("unchecked")
+	public String supplierRequest() 
+	{
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		List<Product> productList = sessionFactory.getCurrentSession().createQuery("from Product where enabled=false").getResultList();
+		String requestjson= gson.toJson(productList);
+		return requestjson;
+		
+	}
+
 }

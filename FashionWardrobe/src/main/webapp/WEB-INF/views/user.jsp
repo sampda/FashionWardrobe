@@ -1,22 +1,40 @@
 <%@include file="header.jsp" %>
-<div class="container">
-<hr>
-<div ng-app="myApp" ng-controller="myCtrl">
-<div style="overflow-x:auto;">
-    <div class="container">
-        <div class="row">
-	       <div class="col-md-12">
-               <h4>User List</h4>
-<div>
-<label>Search</label>
-<input type="text" ng-model="test"/>
-</div>
-
+<div class="container"> 
+ <h4>USER LIST</h4> 
+ <hr> 
+     <div class="row">
+       <div class="col-xs-6">
+       
+             <label>Search</label>
+             <input type="text" ng-model="test"/>
+ </div>
+ 
+<div class="col-xs-6">
+ <div class="form-inline">
+           <label>Show</label>
+          <select class="form-control1" ng-model="maxsize" ng-init="maxsize=5">
+            <option ng-selected="true">5</option>
+            <option>10</option>
+            <option>15</option>
+            <option>20</option>  
+          </select>
+           <label>entries</label>
+           
+           </div>
+  </div>
+       </div>   
+           <hr>  
+        
+  </div> 
+  
+  
+       <div class="container"> 
+   
  <div class="table-responsive">
-                    <table id="mytable" class="table table-bordred table-striped" bgcolor="#00FF00">
+                    <table id="mytable" class="table table-hover">
                     <thead>
 <tr>
-<th ng-click="sort('userId')">UserId
+<th ng-click="sort('userId')">#
 <span class="glyphicon sort-icon" ng-show="sortKey=='userId'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
 </th>
 <th ng-click="sort('username')">username
@@ -29,18 +47,28 @@
 </tr>
 </thead>
 <tbody>
-<tr ng-repeat="x in abc | filter: test | orderBy:sortKey:reverse">
+<tr dir-paginate="x in abc | filter: test | orderBy:sortKey:reverse| itemsPerPage: maxsize" pagination-id="Product">
       <td>{{x.userId}}</td>
       <td>{{x.username}}</td>
       <td>{{x.enabled}}</td>
-      <td><a href ="enableuser-{{x.userId}}" class="btn btn-info">Enable/Disable</a></td>
+      <td>
+      <a class="btn btn-primary btn-circle" href="enableuser-{{x.userId}}" data-toggle="tooltip" title="Enable/Disable">
+      		 <i class="fa fa-exchange"></i></a>
+      
+     
+      </td>
 </tr>
 </tbody>
 </table>
+     </div>
+     <dir-pagination-controls  class="pull-right" max-size="5" pagination-id="Product" direction-links="true" boundary-links="true">
+                </dir-pagination-controls>
+              
+
 </div>
-</div>
+
 <script>
-var app = angular.module('myApp', []);
+var app = angular.module('myApp', ['angularUtils.directives.dirPagination']);
  app.controller('myCtrl', function($scope) {
     $scope.abc = ${stringUser};
     $scope.sort = function(keyname) {
@@ -49,12 +77,13 @@ var app = angular.module('myApp', []);
       }
  });
  
- 
+ $(document).ready(function(){
+	    $('[data-toggle="tooltip"]').tooltip({
+	    	placement : 'bottom'
+	    	}); 
+	});
+
 </script> 
-</div>
-</div>
-</div>
-</div>
-</div>
+
 
 <%@include file="footer.jsp" %>

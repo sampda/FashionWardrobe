@@ -48,11 +48,11 @@ public class ProductSpecificationController
 	    catch(Exception e)
 	    {
 		   HttpSession session= request.getSession();
-		   session.setAttribute("Error", "Product Specification Cannot Be Editted!!Constraint Violation");
+		   session.setAttribute("Error", "<div class=\"alert\"><span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span>Product Cannot Be Edited!! Try Adding Specification</div>");
 		   return "redirect:/"+session.getAttribute("page");
 	    }
 		
 		return "productSpec";
 	}
-
+	
 }

@@ -51,7 +51,7 @@
                         <td>{{x.productName}}</td>
                         <td><i class="fa fa-inr"></i> {{x.productPrice}}</td>
                         <td>
-        <a href ="addCart-{{x.productId}}"><i class="fa fa-shopping-cart fa-2x" data-toggle="tooltip" title="Add To Cart"></i></a></td>
+        <a href ="addCart-{{x.productId}}-1"><i class="fa fa-shopping-cart fa-2x" data-toggle="tooltip" title="Add To Cart"></i></a></td>
      <td> <a href ="deleteWishList-{{x.wishListId}}"><i class="fa fa-trash-o fa-2x" data-toggle="tooltip" title="Delete"></i></a>
                        </td>
                         <td><img src="resources/images/product{{x.productId}}.jpg" width="200" height="200"></td>

@@ -23,14 +23,16 @@ public class SupplierDaoImpl implements SupplierDao{
 		
 		return sessionFactory.getCurrentSession().createQuery("from Supplier").getResultList();
 	}
+	
 	@SuppressWarnings("unchecked")
-	public String listSupplierViaJson() {
+	public String listSupplierViaJson() 
+	{
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		
 		List<Supplier> list = sessionFactory.getCurrentSession().createQuery("from Supplier").getResultList();
 		String listSupplier = gson.toJson(list);
 		return listSupplier;
 	}
+	
 	@SuppressWarnings("unchecked")
 	public Supplier getIdFromName(String companyName) {
 		String query = "from Supplier where companyName='"+companyName+"'";
@@ -56,7 +58,7 @@ public class SupplierDaoImpl implements SupplierDao{
 	@SuppressWarnings("unchecked")
 	public Supplier getIdFromId(int supplierId)
 	{
-		String query ="from Supplier where supplierId="+supplierId;
+		String query ="from Supplier where userId="+supplierId;
 		List<Supplier> supplierList = sessionFactory.getCurrentSession().createQuery(query).getResultList();
 		if(supplierList!=null && !supplierList.isEmpty())
 		{
@@ -67,6 +69,8 @@ public class SupplierDaoImpl implements SupplierDao{
 		}
 		
 	}
+
+	
 
 
 }

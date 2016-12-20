@@ -1,26 +1,28 @@
 <%@include file="header.jsp" %>
 
 <div class="container">
-<h2 style="color:red;">${sessionScope.Error} 
- <c:set var="Error" value="" scope="session"/></h2> 
+<div class="form-signin" style="max-width:700px;">
+   ${sessionScope.Error} <c:set var="Error" value="" scope="session"/>
+
+<h4>Add Category</h4>  
  <hr>
 
 <form:form method="POST" action="categories" modelAttribute="category">
 <form:input path="categoryId" hidden="true"/>
                   <div class="form-group">
-                    <label for="categoryName">Category Name</label>
+                    <label for="categoryName">Category Name<span style="color:red;"> *</span></label>
                       <form:input type="text" class="form-control" path="categoryName" placeholder="Enter Category Name" maxlength="255"/>
                       <form:errors cssStyle="color:red;" path="categoryName"/>
                   </div>
                   <div class="form-group">
-                    <label for="categoryDesc">Category Description</label>
+                    <label for="categoryDesc">Category Description<span style="color:red;"> *</span></label>
                       <form:input type="text" class="form-control" path="categoryDesc" placeholder="Enter Category Description" maxlength="255"/>
                       <form:errors cssStyle="color:red;" path="categoryDesc"/>
                   </div>
                    
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary pull-right">Submit</button>
 </form:form>
-
+</div>
 <hr>
 </div>
 
@@ -66,7 +68,8 @@
 <th ng-click="sort('categoryDesc')">CategoryDesc
 <span class="glyphicon sort-icon" ng-show="sortKey=='categoryDesc'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
 </th>
-<th>MANAGE</th>
+<th></th>
+
                     </thead>
                     <tbody>
 <tr dir-paginate="x in abc | filter: test | orderBy:sortKey:reverse | itemsPerPage: maxsize" pagination-id="Product">
@@ -78,6 +81,7 @@
       
       <a class="btn btn-primary btn-circle" href="editCategory-{{x.categoryId}}" data-toggle="tooltip" data-placement="bottom" title="Edit">
       		 <i class="glyphicon glyphicon-edit"></i></a>
+      		 
       	<a class="btn btn-primary btn-circle" href="delete-{{x.categoryId}}" data-toggle="tooltip" data-placement="bottom" title="Delete">
       		 <i class="glyphicon glyphicon-remove"></i></a>
       
@@ -86,11 +90,10 @@
                     
 				   </tbody>
                    </table>
-                   
+                   </div>
      <dir-pagination-controls  class="pull-right" max-size="5" pagination-id="Product" direction-links="true" boundary-links="true">
                 </dir-pagination-controls>
                 
-                </div>
 </div>
 
 

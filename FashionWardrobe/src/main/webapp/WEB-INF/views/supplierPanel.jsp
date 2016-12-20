@@ -3,12 +3,12 @@
 <div class="container">
    <div class="col-md-6 col-md-offset-3">
       <div class="panel panel-default">
-        <div class="panel-heading">  <h4 >User Profile</h4></div>
+        <div class="panel-heading">  <h4 style="margin-top: 10px;;margin-bottom: 15px;">User Profile</h4></div>
             <div class="panel-body2">
                  <div class="box box-info">
                       <div class="box-body">
          				  <div class="col-sm-12">
-                                  <h4 style="color:#00b1b1;">${pageContext.request.userPrincipal.name}</h4>
+                                  <h4 style="color:#01579B;">${pageContext.request.userPrincipal.name}</h4>
                           </div>
             <div class="clearfix"></div>
             <hr style="margin:5px 0 5px 0;">
@@ -52,7 +52,7 @@
 
    <div class="col-md-6 col-md-offset-3">
       <div class="panel panel-default">
-        <div class="panel-heading">  <h4 >Supplier Details</h4></div>
+        <div class="panel-heading">  <h4 style="margin-top: 10px;;margin-bottom: 15px;">Supplier Details</h4></div>
             <div class="panel-body2">
                  <div class="box box-info">
                       <div class="box-body">
@@ -108,6 +108,7 @@
 
  <div class="row">
 	       <div class="col-md-6 col-md-offset-3">
+	       <c:set var="page" value="supplierPanel" scope="session"/>
  <form:form method="POST" action="add/product" modelAttribute="product" enctype="multipart/form-data">
                  <form:input path="productId" hidden="true"/>
                   <div class="form-group">
@@ -116,7 +117,7 @@
                   </div>
                   <div class="form-group">
                     <label for="productDesc">Product Description</label>
-                      <form:input type="text" class="form-control" path="productDesc" placeholder="Enter Product Description" maxlength="255"/>
+                      <form:input type="text" autocomplete="off" class="form-control" path="productDesc" placeholder="Enter Product Description" maxlength="255"/>
                   </div>
                   <div class="form-group">
                     <label for="productPrice">Product Price</label>
@@ -152,17 +153,40 @@
       </form:form>
       </div>
       </div>
+ 
+ </div>
+ <div class="container"> 
+ <h4>PRODUCT LIST</h4> 
+ <hr> 
+     <div class="row">
+       <div class="col-xs-6">
+       
+             <label>Search</label>
+             <input type="text" ng-model="test"/>
+ </div>
+ 
+<div class="col-xs-6">
+ <div class="form-inline">
+           <label>Show</label>
+          <select class="form-control1" ng-model="maxsize" ng-init="maxsize=5">
+            <option ng-selected="true">5</option>
+            <option>10</option>
+            <option>15</option>
+            <option>20</option>  
+          </select>
+           <label>entries</label>
+           
+           </div>
+  </div>
+       </div>   
+           <hr>  
+        
+  </div> 
       
+      <div class="container">
+<div class="table-responsive">
+                    <table id="mytable" class="table table-hover" >
       
-  <div class="row">
-	       <div class="col-md-12">
-               <h4>Product List</h4>
-                              <div>
-<label>Search</label>
-<input type="text" ng-model="test"/>
-</div>
-               <div class="table-responsive">
-                    <table id="mytable" class="table table-bordred table-striped" bgcolor="#00FF00">
                     <thead>
                        <th ng-click="sort('productId')">ProductId
 <span class="glyphicon sort-icon" ng-show="sortKey=='productId'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
@@ -191,7 +215,7 @@
                     </thead>
                     <tbody>
                     
-                     <tr ng-repeat="x in resultValue=(getProduct | filter: test) | orderBy:sortKey:reverse">
+                     <tr dir-paginate="x in resultValue=(getProduct | filter: test) | orderBy:sortKey:reverse | itemsPerPage: maxsize" pagination-id="Product">
                         <td>{{x.productId}}</td>
                         <td>{{x.productName}}</td>
                         <td>{{x.productPrice}}</td>
@@ -225,29 +249,44 @@
                      <td></td>
                      <td></td>
                      <td></td>
-                     <td> Grand Total: Rs {{resultValue | totalSumPriceQty:'productQauntity':'productPrice'}}</td>
+                     <td> Grand Total: </td>
+                     <td> Rs {{resultValue | totalSumPriceQty:'productQauntity':'productPrice'}}</td>
                      </tr>
 				   </tbody>
                    </table>
                    
 </div>
+
+ <dir-pagination-controls  class="pull-right" max-size="5" pagination-id="Product" direction-links="true" boundary-links="true">
+                </dir-pagination-controls>
+                   
 </div>
-</div>
+
 
  
-</div>
-
 <script>
 
-var app = angular.module('myApp', []).filter('totalSumPriceQty', function () {
-    return function (data, key1, key2) {
+var app = angular.module('myApp', ['angularUtils.directives.dirPagination']).filter('totalSumPriceQty', function () 
+		{
+    return function (data, key1, key2) 
+    {
        
-        if (typeof (data) === 'undefined' && typeof (key1) === 'undefined' && typeof (key2) === 'undefined') {
+        if (typeof (data) === 'undefined' && typeof (key1) === 'undefined' && typeof (key2) === 'undefined') 
+        {
             return 0;
         }
         var sum = 0;
-        for (var i = 0; i < data.length; i++) {
+        try
+        {
+           for (var i = 0; i < data.length; i++) 
+           {
             sum = sum + (parseInt(data[i][key1]) * parseInt(data[i][key2]));
+           }
+        }
+        
+        catch(e)
+        {
+        	return 0;
         }
         return sum;
     }

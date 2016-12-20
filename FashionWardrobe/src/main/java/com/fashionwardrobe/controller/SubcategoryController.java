@@ -82,7 +82,7 @@ public class SubcategoryController
 	    catch(DataIntegrityViolationException e)
 	    {
 		   HttpSession session= request.getSession();
-		   session.setAttribute("Error", "Subcategory Cannot Be Deleted!!Constraint Violation");
+		   session.setAttribute("Error", "<div class=\"alert\"><span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span>Subcategory Cannot Be Deleted!!Constraint Violation</div>");
 	    }
 		return "redirect:/subCategory";
 		

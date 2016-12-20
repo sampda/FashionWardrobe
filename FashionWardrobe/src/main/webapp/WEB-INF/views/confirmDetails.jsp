@@ -2,6 +2,8 @@
 <div class="container">
 
 <form:form modelAttribute="userDetails">
+<div class="form-signin" style="max-width:600px;">
+<h4>Confirm Your Details</h4>
 <div class="form-group">
                     <label>UserName</label>
                       <input type="text" class="form-control" name="userName" placeholder="${userDetails.username}" readonly/>
@@ -23,8 +25,11 @@
                     <label>Contact number</label>
                       <input type="text" class="form-control" name="contactNo" placeholder="${userDetails.contactno}" readonly/>
 </div>
-<button name="_eventId_edit" type="submit" class="btn btn-warning">Edit</button>
-<button name ="_eventId_submit" type="submit" class="btn btn-warning">Submit</button>
+<button name ="_eventId_edit" type="submit" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+ Edit</button>
+<button name ="_eventId_submit" type="submit" class="btn btn-success pull-right"><i class="fa fa-check-circle-o" aria-hidden="true"></i>
+ Submit</button>
+</div>
 </form:form>
 </div>
 

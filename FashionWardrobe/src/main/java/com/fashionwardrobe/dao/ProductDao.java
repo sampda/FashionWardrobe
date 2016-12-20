@@ -13,7 +13,8 @@ public interface ProductDao
 	public void deleteProduct(int productId);
 	public void UpdateProduct(int productId);
 	public String stringProductEnabled();
-	public void updateProductMinus(int productId);
-	public void updateProductPlus(int productId);
+	public void updateProductMinus(int productId, int productQauntity);
+	public void updateProductPlus(int productId, int productQauntity);
 	public List<Product> getProductIdById(int supplierId);
+    public String supplierRequest();
 }

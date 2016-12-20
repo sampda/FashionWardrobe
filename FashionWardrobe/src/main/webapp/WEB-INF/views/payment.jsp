@@ -1,35 +1,32 @@
 <%@include file="header.jsp" %>
 
 <div class="container">
-  <div class="row">
-  <div class="col-sm-12">
-  <div class="alert alert-info" role="alert">
-                            <p>Please enter your card details below.</p>
-                        </div>
-                        <hr/>
+ <div class="form-signin" style="max-width:600px;">
+  <h4>Payment Details</h4>                      
+  <hr>
                         <!-- Name -->
                         <form:form>
                         <div class="form-group">
-                            <label class="control-label" for="username">Card Holder's Name</label>
+                            <label class="control-label" for="username">Card Holder's Name<span style="color:red;"> *</span></label>
 
                             <div class="controls">
-                                <input type="text" id="username" name="username" placeholder="" class="form-control">
+                                <input type="text" id="username" name="username" placeholder="Enter Card Holder's Name" class="form-control">
                             </div>
                         </div>
 
                         <!-- Card Number -->
                         <div class="form-group">
-                            <label class="control-label" for="card_number">Card Number</label>
+                            <label class="control-label" for="card_number">Card Number<span style="color:red;"> *</span></label>
 
                             <div class="controls">
-                                <input type="text" id="card_number" name="card_number" placeholder=""
-                                       class="form-control">
+                                <input type="text" id="card_number" name="card_number" placeholder="Card Number"
+                                       class="form-control" >
                             </div>
                         </div>
                         <hr/>
                         <!-- Expiry-->
                         <div class="form-group">
-                            <label class="control-label" for="expiry_month">Card Expiry Date</label>
+                            <label class="control-label" for="expiry_month">Card Expiry Date<span style="color:red;"> *</span></label>
 
                             <div class="row">
                                 <div class="col-sm-4">
@@ -72,7 +69,7 @@
                             <div class="col-sm-3">
                                 <!-- CVV -->
                                 <div class="form-group">
-                                    <label class="control-label" for="password_confirm">Card CVV</label>
+                                    <label class="control-label" for="password_confirm">Card CVV<span style="color:red;"> *</span></label>
 
 
                                     <input type="password" id="password_confirm"
@@ -81,24 +78,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-3">
                                 <!-- Submit -->
                                 <div class="form-group">
-                               <button name="_eventId_cancel" type="submit" class="btn btn-warning">Cancel</button>
-                               <button name ="_eventId_submit" type="submit" class="btn btn-warning">Submit</button>
+                               <button name="_eventId_cancel" type="submit" class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>
+                               <button name ="_eventId_submit" type="submit" class="btn btn-success pull-right"><i class="fa fa-check-square" aria-hidden="true"></i> Submit</button>
                                 </div>
-                            </div>
-                            <div class="col-sm-4"></div>
-                            <div class="col-sm-5">
-                                <!-- Space for Logo -->
-                            </div>
-                        </div>
+                            
 </form:form>
 </div>
     
 </div>
     
-</div>
 
 <%@include file="footer.jsp" %>

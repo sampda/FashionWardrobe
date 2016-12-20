@@ -1,28 +1,33 @@
 <%@include file="header.jsp" %>
 <div class="container">
-<h2>${sessionScope.Error} 
- <c:set var="Error" value="" scope="session"/></h2>
- <c:set var="page" value="product" scope="session"/> 
-<hr>
+<div class="form-signin" style="max-width:700px;">
+
+  ${sessionScope.Error}
+   <c:set var="Error" value="" scope="session"/>
+  <c:set var="page" value="product" scope="session"/>
+
+<h4>Add Product</h4>  
+ <hr>
+
     <form:form method="POST" action="add/product" modelAttribute="product" enctype="multipart/form-data">
                  <form:input path="productId" hidden="true"/>
                   <div class="form-group">
-                    <label for="productName">Product Name</label>
+                    <label for="productName">Product Name<span style="color:red;"> *</span></label>
                       <form:input type="text" class="form-control" path="productName" placeholder="Enter Product Name" maxlength="255"/>
                       <form:errors cssStyle="color:red;" path="productName"/>
                   </div>
                   <div class="form-group">
-                    <label for="productDesc">Product Description</label>
-                      <form:input type="text" class="form-control" path="productDesc" placeholder="Enter Product Description" maxlength="255"/>
+                    <label for="productDesc">Product Description<span style="color:red;"> *</span></label>
+                      <form:input type="text" autocomplete="off" class="form-control" path="productDesc" placeholder="Enter Product Description" maxlength="255"/>
                       <form:errors cssStyle="color:red;" path="productDesc"/>
                   </div>
                   <div class="form-group">
-                    <label for="productPrice">Product Price</label>
+                    <label for="productPrice">Product Price<span style="color:red;"> *</span></label>
                       <form:input type="text" class="form-control" path="productPrice" placeholder="Enter Product Price"/>
                       
                   </div>
                    <div class="form-group">
-                    <label for="productQauntity">Product Quantity</label>
+                    <label for="productQauntity">Product Quantity<span style="color:red;"> *</span></label>
                       <form:input type="text" class="form-control" path="productQauntity" placeholder="Enter Product Quantity" />
                       
                   </div>
@@ -48,22 +53,47 @@
                     <label for="image">Upload Image</label>
                       <form:input class="form-control" path="productImage" type="file"/>
                   </div>
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                  
       </form:form>
+      </div>
 <hr>
-
-    <div class="container">
-        <div class="row">
-	       <div class="col-xs-12">
-               <h4>Product List</h4>
-<div>
-<label>Search</label>
-<input type="text" ng-model="test"/>
 </div>
-                         <div class="table-responsive">
+
+<div class="container"> 
+ <h4>PRODUCT LIST</h4> 
+ <hr> 
+     <div class="row">
+       <div class="col-xs-6">
+       
+             <label>Search</label>
+             <input type="text" ng-model="test"/>
+ </div>
+ 
+<div class="col-xs-6">
+ <div class="form-inline">
+           <label>Show</label>
+          <select class="form-control1" ng-model="maxsize" ng-init="maxsize=5">
+            <option ng-selected="true">5</option>
+            <option>10</option>
+            <option>15</option>
+            <option>20</option>  
+          </select>
+           <label>entries</label>
+           
+           </div>
+  </div>
+       </div>   
+           <hr>  
+        
+  </div> 
+ 
+ 
+    <div class="container"> 
+             <div class="table-responsive">
                     <table id="mytable" class="table table-hover" >
           <thead>
-                       <th ng-click="sort('productId')">ProductId
+                       <th ng-click="sort('productId')">#
 <span class="glyphicon sort-icon" ng-show="sortKey=='productId'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                        </th>
                        <th ng-click="sort('productName')">ProductName
@@ -84,13 +114,17 @@
                        </th>
                       
                        <th>Product Image</th>
-                       <th>Product Enable/Disable</th>
+                        <th ng-click="sort('enabled')">Product Enable/Disable
+<span class="glyphicon sort-icon" ng-show="sortKey=='enabled'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                       </th>
+                      
+                      
                        <th>Total Price</th>
-                       <th>Manage</th>
+                       <th></th>
                     </thead>
                     <tbody>
                     
-                     <tr ng-repeat="x in resultValue=(abc | filter: test) | orderBy:sortKey:reverse">
+                     <tr dir-paginate="x in resultValue=(abc | filter: test) | orderBy:sortKey:reverse| itemsPerPage: maxsize" pagination-id="Product">
                         <td>{{x.productId}}</td>
                         <td>{{x.productName}}</td>
                         <td>{{x.productPrice}}</td>
@@ -102,13 +136,21 @@
                         <td>{{x.enabled}}</td>
                         <td>Rs. {{x.productPrice * x.productQauntity}}</td>
                         <td>
-      <a href ="editProduct-{{x.productId}}"><span class="glyphicon glyphicon-edit" data-toggle="tooltip" title="Edit"></span></a>
-      <a href ="deleteProduct-{{x.productId}}"><span class="glyphicon glyphicon-remove" data-toggle="tooltip" title="Delete"></span></a>
-      <a href="viewfullproduct-{{x.productId}}"><span class="glyphicon glyphicon-eye-open" data-toogle="tooltip" title="View Product"></span></a>
-      <a href="productspec-{{x.productId}}"><span class="fa fa-plus-circle" data-toogle="tooltip" title="Add Product Specification"></span></a>
-       <a href="editProdSpec-{{x.productId}}"><span class="glyphicon glyphicon-edit" data-toogle="tooltip" title="Edit Product Specification"></span></a>
+                        
+                        <a class="btn btn-primary btn-circle" href="editProduct-{{x.productId}}" data-toggle="tooltip" data-placement="bottom" title="Edit">
+      		 <i class="glyphicon glyphicon-edit"></i></a>
+      		 
+      	<a class="btn btn-primary btn-circle" href="deleteProduct-{{x.productId}}" data-toggle="tooltip"  title="Delete">
+      		 <i class="glyphicon glyphicon-remove"></i></a>
+      <a class="btn btn-primary btn-circle" href="viewfullproduct-{{x.productId}}" data-toggle="tooltip"  title="View">
+      		 <i class="glyphicon glyphicon-eye-open"></i></a>
+      <a class="btn btn-primary btn-circle" href="productspec-{{x.productId}}" data-toggle="tooltip" title="Add Specification">
+      		 <i class="fa fa-plus-circle"></i></a>
+      <a class="btn btn-primary btn-circle" href="editProdSpec-{{x.productId}}" data-toggle="tooltip"  title="Edit Specification">
+      		 <i class="glyphicon glyphicon-edit"></i></a>
+      <a class="btn btn-primary btn-circle" href="enableproduct-{{x.productId}}" data-toggle="tooltip" title="Enable/Disable">
+      		 <i class="fa fa-exchange"></i></a>
       
-       <a href="enableproduct-{{x.productId}}"><span class="fa fa-exchange" data-toogle="tooltip" title="Toggle Product"></span></a>
        
       </td>
       
@@ -133,12 +175,12 @@
                    </table>
                    
 </div>
-</div>
-</div>
-</div>
+<dir-pagination-controls  class="pull-right" max-size="5" pagination-id="Product" direction-links="true" boundary-links="true">
+                </dir-pagination-controls>
+     
 </div>
 <script>
-var app = angular.module('myApp', []).filter('totalSumPriceQty', function () {
+var app = angular.module('myApp', ['angularUtils.directives.dirPagination']).filter('totalSumPriceQty', function () {
     return function (data, key1, key2) {
         
         if (typeof (data) === 'undefined' && typeof (key1) === 'undefined' && typeof (key2) === 'undefined') {
